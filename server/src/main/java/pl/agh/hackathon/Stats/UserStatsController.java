@@ -1,28 +1,58 @@
 package pl.agh.hackathon.Stats;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import pl.agh.hackathon.Stats.UserStatsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.agh.hackathon.Stats.UserStatsService;
 
 @RestController
 @RequestMapping("/api/stats")
 @RequiredArgsConstructor
+@Tag(name = "Stats", description = "Statystyki użytkowników i ranking")
 public class UserStatsController {
 
     private final UserStatsService userStatsService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserStatsResponse> getStats(@PathVariable String userId) {
+    @Operation(
+            summary = "Statystyki gracza",
+            description = "Zwraca łączną liczbę odpowiedzi i skuteczność gracza",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Statystyki gracza",
+                            content = @Content(schema = @Schema(implementation = UserStatsResponse.class))),
+                    @ApiResponse(responseCode = "404", description = "Gracz nie istnieje",
+                            content = @Content)
+            }
+    )
+    public ResponseEntity<UserStatsResponse> getStats(
+            @Parameter(description = "ID użytkownika", example = "user123")
+            @PathVariable String userId
+    ) {
         return ResponseEntity.ok(userStatsService.getStats(userId));
     }
 
     @GetMapping("/leaderboard")
+    @Operation(
+            summary = "Ranking graczy",
+            description = "Zwraca paginowaną listę graczy posortowanych po skuteczności",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Lista graczy",
+                            content = @Content(schema = @Schema(implementation = LeaderboardResponse.class))),
+                    @ApiResponse(responseCode = "400", description = "Nieprawidłowy limit (dozwolone: 10 lub 20)",
+                            content = @Content)
+            }
+    )
     public ResponseEntity<LeaderboardResponse> getLeaderboard(
+            @Parameter(description = "Numer strony (od 1)", example = "1")
             @RequestParam(defaultValue = "1")  int page,
+            @Parameter(description = "Liczba wyników na stronie (10 lub 20)", example = "10")
             @RequestParam(defaultValue = "10") int limit
     ) {
         if (limit != 10 && limit != 20) {

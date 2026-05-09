@@ -13,7 +13,7 @@ public interface UserStatsRepository extends JpaRepository<UserStats, String> {
 
     // Atomicznie inkrementuje liczniki — bez wyścigu przy równoczesnych requestach
     @Modifying
-    @Query("""
+    @Query("""  
         UPDATE UserStats s
         SET s.totalAnswers   = s.totalAnswers + :total,
             s.correctAnswers = s.correctAnswers + :correct
