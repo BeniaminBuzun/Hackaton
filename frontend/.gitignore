@@ -1,7 +1,34 @@
-.DS_Store
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Local env files
 .env
-/node_modules/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Testing
+coverage
+
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Build Outputs
+build
+dist
 
 # React Router
-/.react-router/
-/build/
+.react-router/
+
+# Debug
+npm-debug.log*
+
+# Misc
+.DS_Store
+*.pem
