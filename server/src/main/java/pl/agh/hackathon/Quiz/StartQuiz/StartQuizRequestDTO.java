@@ -1,5 +1,7 @@
 package pl.agh.hackathon.Quiz.StartQuiz;
 
+import pl.agh.hackathon.QuestionType.QuestionType;
+
 import java.util.Dictionary;
 
 public class StartQuizRequestDTO {
