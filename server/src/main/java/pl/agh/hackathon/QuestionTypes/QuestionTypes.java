@@ -1,4 +1,5 @@
 package pl.agh.hackathon.QuestionTypes;
 
-public class QuestionTypes {
+public class QuestionTypes
+{
 }

@@ -1,4 +1,4 @@
-package pl.agh.hackathon.Quizes;
+package pl.agh.hackathon.Quiz;
 
 public class Quiz
 {
