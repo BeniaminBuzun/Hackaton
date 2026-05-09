@@ -13,8 +13,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User
-{
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,6 +25,6 @@ public class User
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "userSet")
     private Set<Quiz> quizSet = new HashSet<>();
 }
