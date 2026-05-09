@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import { Link } from "react-router"
 
 import { Button } from "@components/button"
 
@@ -130,9 +131,12 @@ export default function LeaderboardRoute() {
                     {entry.position}
                   </span>
                   <div className="flex flex-col">
-                    <span className="text-sm font-semibold text-white">
+                    <Link
+                      to={`/users/${entry.userId ?? entry.position}`}
+                      className="text-sm font-semibold text-white transition hover:text-cyan-200"
+                    >
                       {entry.name}
-                    </span>
+                    </Link>
                     <span className="text-xs text-white/50">Club runner</span>
                   </div>
                 </div>

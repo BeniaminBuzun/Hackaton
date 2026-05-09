@@ -7,4 +7,5 @@ export default [
 
 	route("result", "routes/result.tsx"),
 	route("leaderboard", "routes/leaderboard.tsx"),
+	route("users/:userId", "routes/user-profile.tsx"),
 ] satisfies RouteConfig
