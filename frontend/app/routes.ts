@@ -6,4 +6,5 @@ export default [
 	route("quiz2", "routes/quiz2.tsx"),
 
 	route("result", "routes/result.tsx"),
+	route("leaderboard", "routes/leaderboard.tsx"),
 ] satisfies RouteConfig

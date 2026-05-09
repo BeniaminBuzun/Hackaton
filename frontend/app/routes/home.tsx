@@ -42,6 +42,9 @@ export default function Home() {
                   }] }}
                 ></Link>
               </Button>
+              <Button asChild variant="outline" size="lg" className="h-11 px-6 text-base">
+                <Link to="/leaderboard">View leaderboard</Link>
+              </Button>
               <span className="text-sm text-white/50">
                 Doors open soon.
               </span>
