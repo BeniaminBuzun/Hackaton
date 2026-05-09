@@ -2,6 +2,7 @@ package pl.agh.hackathon.question;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.agh.hackathon.Songs.Song;
 import pl.agh.hackathon.answer.Answer;
 
 import java.util.List;
@@ -25,12 +26,11 @@ public class Question {
 	@Column(name="type", nullable=false)
 	@ManyToOne
 	private QuestionTypes type;
+	*/
 
-	@Column(name="song", nullable=false)
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name= Columns.SONG_ID)
+	@JoinColumn(name="songId")
 	private Song song;
-	 */
 
 	@Column(name="correctAnswer", nullable=false)
 	private String answer1;

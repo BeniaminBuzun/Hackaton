@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import pl.agh.hackathon.Artists.Artist;
 import pl.agh.hackathon.Genre.Genre;
+import pl.agh.hackathon.question.Question;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,8 @@ public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Column(name="songId")
+    private long id;
 
     private String title;
 
@@ -27,7 +29,7 @@ public class Song {
 
     private String releaseDate;
 
-    private Integer durationMs;
+    private int durationMs;
 
     private String explicitType;
 
@@ -43,4 +45,7 @@ public class Song {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id")
     private Genre genre;
+
+	@OneToMany
+	Set<Question> questions;
 }
