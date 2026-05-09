@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router"
 
-import { Button } from "@workspace/ui/components/button"
+import { Button } from "@components/button"
 
 import { getLatestResult } from "../lib/quizSessionStore"
 import type { QuizResult } from "../lib/quizClient"

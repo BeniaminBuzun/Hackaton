@@ -1,6 +1,6 @@
 import { Link } from "react-router"
 
-import { Button } from "@workspace/ui/components/button"
+import { Button } from "@components/button"
 
 export default function Home() {
   return (

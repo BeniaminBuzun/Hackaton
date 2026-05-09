@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router"
 
-import { Button } from "@workspace/ui/components/button"
+import { Button } from "@components/button"
 
 import { useQuizFlow } from "../hooks/useQuizFlow"
 import { setLatestResult } from "../lib/quizSessionStore"
