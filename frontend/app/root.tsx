@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   Meta,
   Outlet,
@@ -43,10 +44,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
             <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
-              <span className="text-foreground/90">Tonight</span>
-              <span>Dancefloor</span>
-              <span>Scores</span>
-              <span>Club</span>
+              <Link to="/">Home</Link>
+              <Link to="/quiz">Quiz</Link>
+              <Link to="/settings">Settings</Link>
             </nav>
           </header>
 
