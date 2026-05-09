@@ -2,10 +2,13 @@ package pl.agh.hackathon.question;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.agh.hackathon.QuestionType.QuestionType;
+import pl.agh.hackathon.Quiz.Quiz;
 import pl.agh.hackathon.Songs.Song;
 import pl.agh.hackathon.answer.Answer;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,17 +19,15 @@ import java.util.List;
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", nullable=false)
+	@Column(name="questionId", nullable=false)
 	private long id;
 
 	@Column(name="question", nullable=false)
 	private String question;
 
-	/*
-	@Column(name="type", nullable=false)
-	@ManyToOne
-	private QuestionTypes type;
-	*/
+	@Enumerated(EnumType.STRING)
+	@Column(name = "question_type")
+	private QuestionType type;
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="songId")
@@ -46,4 +47,7 @@ public class Question {
 
 	@OneToMany(fetch=FetchType.LAZY)
 	private List<Answer> answers;
+
+	@ManyToMany(fetch=FetchType.LAZY)
+	private Set<Quiz> quizzes;
 }

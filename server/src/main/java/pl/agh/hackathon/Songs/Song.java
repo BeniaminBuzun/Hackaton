@@ -46,6 +46,6 @@ public class Song {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	Set<Question> questions;
 }

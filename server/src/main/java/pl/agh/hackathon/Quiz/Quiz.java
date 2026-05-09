@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.agh.hackathon.QuestionType.QuestionType;
 import pl.agh.hackathon.User.User;
+import pl.agh.hackathon.question.Question;
 // import pl.agh.hackathon.Question.Question;
 
 import java.util.HashSet;
@@ -22,9 +23,10 @@ public class Quiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="quizId")
     private long id;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(
             name = "quiz_users",
             joinColumns = @JoinColumn(name = "quiz_id"),
@@ -43,6 +45,6 @@ public class Quiz {
 
 
 
-//    @ManyToMany(mappedBy = "id")
-//    private Set<Question> questionSet = new HashSet<>();
+    @ManyToMany(mappedBy = "quizzes", fetch=FetchType.LAZY)
+    private Set<Question> questionSet = new HashSet<>();
 }
