@@ -1,6 +1,7 @@
 import { Link } from "react-router"
 
 import { Button } from "@components/button"
+import AudioVisualizer from "@components/audiovis"
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
               <h1 className="text-3xl font-semibold leading-tight text-white md:text-5xl">
                 Enter the neon club and sync with the beat.
               </h1>
+              <AudioVisualizer audioUrl="skolim.mp3"></AudioVisualizer>
               <p className="max-w-xl text-base text-white/70 md:text-lg">
                 Pulse Quiz is your late-night soundcheck. Identify the track, lock
                 the vibe, and race the laser-lit leaderboard.
