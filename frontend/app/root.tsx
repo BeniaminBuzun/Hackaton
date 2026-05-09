@@ -7,9 +7,10 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import type { Route } from "./+types/root";
 import "./app.css";
 
-export const links = () => [
+export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
@@ -22,7 +23,7 @@ export const links = () => [
   },
 ];
 
-export function Layout({ children }) {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -44,10 +45,10 @@ export default function App() {
   return <Outlet />;
 }
 
-export function ErrorBoundary({ error }) {
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
-  let stack;
+  let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
     message = error.status === 404 ? "404" : "Error";
