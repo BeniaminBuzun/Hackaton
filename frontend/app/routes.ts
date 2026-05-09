@@ -4,4 +4,5 @@ export default [
 	index("routes/home.tsx"),
 	route("quiz/:quizId", "routes/quiz.tsx"),
 	route("result", "routes/result.tsx"),
+	route("leaderboard", "routes/leaderboard.tsx"),
 ] satisfies RouteConfig

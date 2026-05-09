@@ -33,6 +33,9 @@ export default function Home() {
               <Button asChild size="lg" className="h-11 px-6 text-base">
                 <Link to="/quiz/neon-club">Enter the dancefloor</Link>
               </Button>
+              <Button asChild variant="outline" size="lg" className="h-11 px-6 text-base">
+                <Link to="/leaderboard">View leaderboard</Link>
+              </Button>
               <span className="text-sm text-white/50">
                 Doors open soon.
               </span>
