@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.agh.hackathon.QuestionType.QuestionTypes;
 import pl.agh.hackathon.User.User;
-import pl.agh.hackathon.Question.Question;
+//import pl.agh.hackathon.Question.Question;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +30,6 @@ public class Quiz
     @ManyToMany(mappedBy = "quizes")
     private Set<QuestionTypes> questionTypesSet = new HashSet<>();
 
-    @ManyToMany(mappedBy = "quizes")
-    private Set<Question> questionSet = new HashSet<>();
+//    @ManyToMany(mappedBy = "quizes")
+//    private Set<Question> questionSet = new HashSet<>();
 }
