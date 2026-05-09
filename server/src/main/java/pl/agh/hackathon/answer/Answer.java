@@ -28,7 +28,7 @@ public class Answer {
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="questionId")
-	Question question;
+	private Question question;
 
 	/*
 	@Column(name="userId", nullable=false)
@@ -38,8 +38,8 @@ public class Answer {
 	 */
 
 	@Column(name="correctValue", nullable=false)
-	int correct;
+	private int correct;
 
 	@Column(name="answer", nullable=true)
-	int answer;
+	private Integer answer;
 }
