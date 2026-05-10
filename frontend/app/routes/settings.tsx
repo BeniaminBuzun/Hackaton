@@ -1,53 +1,69 @@
 import { useState } from "react";
-import { Link } from "react-router";
 import { Button } from "@components/button";
 import { useRequireAuth } from "../hooks/useRequireAuth";
-import { useNavigate } from "react-router"
+import { useNavigate, Link } from "react-router"
+import { getUserId } from "@/lib/authStore";
+import axios from "axios";
 
 type SettingsForm = {
   numQuestions: number;
-  genre: string;
   questionTypes: {
     genre: boolean;
-    date: boolean;
-    authors: boolean;
-    skinColor: boolean;
-    aiSlop: boolean;
+    timePeriod: boolean;
+    artists: boolean;
+    songName: boolean;
   };
 };
 
 export default function SettingsPage() {
   const { isAuthenticated } = useRequireAuth();
   const navigate = useNavigate();
-
   const [numQuestions, setNumQuestions] = useState(5);
-  const [genre, setGenre] = useState("none"); // "none" means no genre selected
   const [questionTypes, setQuestionTypes] = useState({
     genre: true,
-    date: false,
-    authors: false,
-    skinColor: false,
-    aiSlop: false,
+    artists: false,
+    songName: false,
+    timePeriod: false
   });
+  const userId = getUserId()
+  async function sendQuizRequest() {
+    if (!isAuthenticated) {
+      navigate("/login", {
+        replace: true,
+        state: { from: location.pathname },
+      })
+      return
+    }
+    const url = 'http://localhost:8081/api/quizes';
+    const body = {
+      options: {
+        "GENRE": questionTypes.genre,
+        "ARTISTS": questionTypes.artists,
+        "SONG_NAME": questionTypes.songName,
+        "TIME_PERIOD": questionTypes.timePeriod,
+      },
+      "retake": false,
+      "userId": userId,
+    };
 
-  // Condition: genre checkbox disabled when dropdown is NOT "none"
-  const isGenreCheckboxDisabled = genre !== "none";
+    try {
+      const response = await axios.post(url, body, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log(  'Response:', response.data);
+      navigate('/quiz2', { state: response.data });
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   const handleQuestionTypeChange = (field: keyof typeof questionTypes) => {
     setQuestionTypes((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
   const handleGo = () => {
-    const formData: SettingsForm = {
-      numQuestions,
-      genre,
-      questionTypes,
-    };
-    console.log("Settings values:", formData);
-    setTimeout(() => {
-      navigate("/quiz2", { state: formData });
-    }, 1000);
-
+    sendQuizRequest()
   };
 
   if (!isAuthenticated) {
@@ -78,7 +94,7 @@ export default function SettingsPage() {
         <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-6 shadow-[0_0_60px_rgba(34,211,238,0.15)] backdrop-blur-sm">
           <div className="space-y-8">
             {/* Number of Questions */}
-            <div className="flex flex-col gap-2">
+            {/* <div className="flex flex-col gap-2">
               <label className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
                 Number of questions
               </label>
@@ -90,28 +106,6 @@ export default function SettingsPage() {
                 onChange={(e) => setNumQuestions(parseInt(e.target.value) || 1)}
                 className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition-all focus:border-cyan-400/50 focus:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
               />
-            </div>
-
-            {/* Genre Dropdown */}
-            {/* <div className="flex flex-col gap-2">
-              <label className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
-                Genre
-              </label>
-              <select
-                value={genre}
-                onChange={(e) => setGenre(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition-all focus:border-cyan-400/50 focus:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
-              >
-                <option value="none">None (no genre filter)</option>
-                <option value="rock">Rock</option>
-                <option value="pop">Pop</option>
-                <option value="electronic">Electronic</option>
-                <option value="hiphop">Hip Hop</option>
-                <option value="jazz">Jazz</option>
-              </select>
-              <p className="text-xs text-white/40">
-                When a genre is selected, the "genre" question type is disabled.
-              </p>
             </div> */}
 
             {/* Question Types (Checkboxes) */}
@@ -122,17 +116,12 @@ export default function SettingsPage() {
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {/* Genre Checkbox */}
                 <label
-                  className={`flex items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3 transition-all ${
-                    isGenreCheckboxDisabled
-                      ? "cursor-not-allowed opacity-50"
-                      : "cursor-pointer hover:border-cyan-400/50"
-                  }`}
+                  className={`flex items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3 transition-all cursor-pointer hover:border-cyan-400/50`}
                 >
                   <input
                     type="checkbox"
                     checked={questionTypes.genre}
                     onChange={() => handleQuestionTypeChange("genre")}
-                    disabled={isGenreCheckboxDisabled}
                     className="h-4 w-4 rounded border-white/20 bg-black/60 text-cyan-400 focus:ring-cyan-400/50"
                   />
                   <span className="text-white/90">Genre</span>
@@ -142,8 +131,8 @@ export default function SettingsPage() {
                 <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3 transition-all hover:border-cyan-400/50">
                   <input
                     type="checkbox"
-                    checked={questionTypes.date}
-                    onChange={() => handleQuestionTypeChange("date")}
+                    checked={questionTypes.timePeriod}
+                    onChange={() => handleQuestionTypeChange("timePeriod")}
                     className="h-4 w-4 rounded border-white/20 bg-black/60 text-cyan-400 focus:ring-cyan-400/50"
                   />
                   <span className="text-white/90">Date</span>
@@ -153,8 +142,8 @@ export default function SettingsPage() {
                 <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3 transition-all hover:border-cyan-400/50">
                   <input
                     type="checkbox"
-                    checked={questionTypes.authors}
-                    onChange={() => handleQuestionTypeChange("authors")}
+                    checked={questionTypes.artists}
+                    onChange={() => handleQuestionTypeChange("artists")}
                     className="h-4 w-4 rounded border-white/20 bg-black/60 text-cyan-400 focus:ring-cyan-400/50"
                   />
                   <span className="text-white/90">Authors</span>
@@ -164,22 +153,11 @@ export default function SettingsPage() {
                 <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3 transition-all hover:border-cyan-400/50">
                   <input
                     type="checkbox"
-                    checked={questionTypes.skinColor}
-                    onChange={() => handleQuestionTypeChange("skinColor")}
+                    checked={questionTypes.songName}
+                    onChange={() => handleQuestionTypeChange("songName")}
                     className="h-4 w-4 rounded border-white/20 bg-black/60 text-cyan-400 focus:ring-cyan-400/50"
                   />
-                  <span className="text-white/90">Skin color</span>
-                </label>
-
-                {/* AI Slop */}
-                <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3 transition-all hover:border-cyan-400/50">
-                  <input
-                    type="checkbox"
-                    checked={questionTypes.aiSlop}
-                    onChange={() => handleQuestionTypeChange("aiSlop")}
-                    className="h-4 w-4 rounded border-white/20 bg-black/60 text-cyan-400 focus:ring-cyan-400/50"
-                  />
-                  <span className="text-white/90">AI slop</span>
+                  <span className="text-white/90">Song name</span>
                 </label>
               </div>
             </div>
