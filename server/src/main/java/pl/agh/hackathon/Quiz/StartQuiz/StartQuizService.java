@@ -74,11 +74,7 @@ public class StartQuizService {
         return types;
     }
 
-    /**
-     * Generuje pytania dla quizu
-     * Bierze N losowych piosenek i dla każdej generuje pytania dla wszystkich wybranych typów
-     * Np. dla 10 piosenek i typów GENRE + ARTISTS = 20 pytań
-     */
+
     private List<Question> generateQuestionsForQuiz(StartQuizRequestDTO request, int numberOfSongs) {
         Set<QuestionType> selectedTypes = extractQuestionTypes(request);
         

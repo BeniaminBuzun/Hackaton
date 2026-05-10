@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pl.agh.hackathon.answer.Answer;
 import pl.agh.hackathon.answer.AnswerRepository;
 
@@ -21,16 +22,17 @@ public class SendAnswerController {
             @RequestBody SendAnswerDTO dto
     ) {
 
-        Long answerId = dto.answerId;
+        Long questionId = dto.questionId;
+        long quizId = dto.quizId;
         String answer = dto.answer;
+        long clientID = dto.userId;
 
-        answerRepository.updateAnswer(answerId, answer);
+        Answer answerEntity = answerRepository.getAnswerByQQC(quizId,questionId,clientID);
 
-        Answer answerEntity = answerRepository
-                .findById(answerId)
-                .orElseThrow(() -> new RuntimeException("Answer not found"));
-
-        System.out.println(answerEntity.getCorrect() + " "+ answer);
+        if(answerEntity == null) {
+            throw new IllegalArgumentException("Answer not found");
+        }
+        answerEntity.setAnswer(answer);
 
         boolean isCorrect =
                 answerEntity.getCorrect().equalsIgnoreCase(answer);
