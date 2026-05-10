@@ -19,18 +19,16 @@ public class UserStatsService {
 
     // answers = { GENRE -> true, ARTISTS -> false, ... }
     @Transactional
-    public void recordAnswers(long userId, Map<QuestionType, Boolean> answers) {
-        int total   = answers.size();
-        int correct = (int) answers.values().stream().filter(Boolean::booleanValue).count();
+    public void recordAnswers(long userId,int total, int correct , Map<QuestionType, Integer> mapTotal , Map<QuestionType, Integer> mapCorrect ) {
 
-        int totalGenre      = answers.containsKey(QuestionType.GENRE)       ? 1 : 0;
-        int correctGenre    = isCorrect(answers, QuestionType.GENRE);
-        int totalArtists    = answers.containsKey(QuestionType.ARTISTS)     ? 1 : 0;
-        int correctArtists  = isCorrect(answers, QuestionType.ARTISTS);
-        int totalSongName   = answers.containsKey(QuestionType.SONG_NAME)   ? 1 : 0;
-        int correctSongName = isCorrect(answers, QuestionType.SONG_NAME);
-        int totalTimePeriod    = answers.containsKey(QuestionType.TIME_PERIOD) ? 1 : 0;
-        int correctTimePeriod  = isCorrect(answers, QuestionType.TIME_PERIOD);
+        int totalGenre      = mapTotal.get(QuestionType.GENRE);
+        int correctGenre    = mapCorrect.get(QuestionType.GENRE);
+        int totalArtists    = mapTotal.get(QuestionType.ARTISTS);
+        int correctArtists  = mapCorrect.get(QuestionType.ARTISTS);
+        int totalSongName   = mapTotal.get(QuestionType.SONG_NAME);
+        int correctSongName = mapCorrect.get(QuestionType.SONG_NAME);
+        int totalTimePeriod    = mapTotal.get(QuestionType.TIME_PERIOD);
+        int correctTimePeriod  = mapCorrect.get(QuestionType.TIME_PERIOD);
 
         int updated = userStatsRepository.incrementStats(
                 userId,
@@ -58,9 +56,6 @@ public class UserStatsService {
         }
     }
 
-    private int isCorrect(Map<QuestionType, Boolean> answers, QuestionType type) {
-        return Boolean.TRUE.equals(answers.get(type)) ? 1 : 0;
-    }
 
     public UserStatsResponse getStats(long userId) {
         UserStats s = userStatsRepository.findById(userId)
