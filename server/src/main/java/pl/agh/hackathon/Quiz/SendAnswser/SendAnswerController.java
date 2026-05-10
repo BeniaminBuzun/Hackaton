@@ -13,22 +13,23 @@ public class SendAnswerController {
 
     private final AnswerRepository answerRepository;
 
-    @PostMapping("/{id}/questions/{nr}/answers")
+    @PostMapping("/answers")
     @ResponseStatus(HttpStatus.OK)
     public SendAnswerResponseDTO sendAnswer(
-            @PathVariable long id,
-            @PathVariable long nr,
             @RequestBody SendAnswerDTO dto
     ) {
 
+        Long answerId = dto.answerId;
+        String answer = dto.answer;
+
+        answerRepository.updateAnswer(answerId, answer);
+
         Answer answerEntity = answerRepository
-                .findByQuizIdAndQuestionId(id, nr)
+                .findById(answerId)
                 .orElseThrow(() -> new RuntimeException("Answer not found"));
 
         boolean isCorrect =
-                answerEntity.getCorrect().equalsIgnoreCase(
-                        String.valueOf(dto.answerNumber)
-                );
+                answerEntity.getCorrect().equalsIgnoreCase(answer);
 
         SendAnswerResponseDTO response = new SendAnswerResponseDTO();
         response.answerIsCorrect = isCorrect;
