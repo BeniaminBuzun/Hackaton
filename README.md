@@ -7,14 +7,20 @@
 # Music Guesser
 
 Celem zespołu jest wykonanie aplikacji, która ułatwi użytkownikom zapoznawanie się z różnymi gatunkami muzycznymi, zespołami, czy pojedycznymi utworami.
+
+Na rynku brakuje aplikacji lub serwisów przez które pasjonaci muzyki mogliby porównywać swoją znajomość świata muzyki, a samo poznawanie różnorodnej muzyki jest długotrwałym procesem.
+Ta aplikacja ma za zadanie jednocześnie umożliwić użytkownikom na rywalizację w tej dziedzinie, oraz zapoznać się z dobrej jakości reprezentantami gatunków, czy okresów czasowych.
+
 Użytkownik może utworzyć quiz według swoich preferencji, a następnie, słuchając utworów, odgadywać gatunek, autora (zespół muzyczny), a nawet przedział czasowy w którym dany utwór powstał.
+
 Po wejściu na ekran główny użytkownik może się zarejestrować lub zalogować podając nazwę użytkownika oraz hasło.
 Po udanym logowaniu, użytkownik może zobaczyć swój profil, statystyki oraz rankingi lub rozpocząć quiz.
-Rozpoczęcie "szybkiego quizu" nie wymaga zalogowania użytkownika.
+
 Zalogowany użytkownik może przed rozpoczęciem quizu dostosować jego zakres i typ pytań.
 Podczas trwania quizu, użytkownik wybiera jedną z dostępnych odpowiedzi a następnie otrzymuje informację o poprawnej odpowiedzi.
 Przechodzi do następnego pytania przez naciśnięcie odpowiedniego przycisku.
-Po zakończeniu quizu, użytkownik może zobaczyć podsumowanie quizu. Następnie może powtórzyć quiz lub powrócić do strony głównej aplikacji.
+
+Po zakończeniu quizu, użytkownik może zobaczyć podsumowanie quizu.
 Pomoże to chętnym użytkownikom zorientować się w świecie muzycznym lub zapoznać się z nowymi gatunkami, utworami czy zespołami.
 
 
