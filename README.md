@@ -61,15 +61,15 @@ Format odpowiedzi:
 3. Metoda GET do odczytania nazwy danego użytkownika
 
 ```bash
-POST /user/{userId}
+GET /user/{userId}
 ```
 
 Format zapytania: puste
 
 Format odpowiedzi:
-{
-    "nick" : "username"
-}
+"username"
+
+
 
 ### Endpointy do tworzenia rozgrywki:
 
