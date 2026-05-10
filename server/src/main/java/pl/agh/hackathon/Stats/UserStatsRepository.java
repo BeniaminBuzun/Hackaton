@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserStatsRepository extends JpaRepository<UserStats, String> {
+public interface UserStatsRepository extends JpaRepository<UserStats, Long> {
 
     @Modifying
     @Query("""
@@ -27,7 +27,7 @@ public interface UserStatsRepository extends JpaRepository<UserStats, String> {
         WHERE s.userId = :userId
     """)
     int incrementStats(
-            @Param("userId")             String userId,
+            @Param("userId")             long userId,
             @Param("total")              int total,
             @Param("correct")            int correct,
             @Param("totalGenre")         int totalGenre,

@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class LeaderboardEntryDto {
     private int rank;
-    private String userId;
+    private long userId;
     private int totalAnswers;
     private int correctAnswers;
     private double accuracyPercent;

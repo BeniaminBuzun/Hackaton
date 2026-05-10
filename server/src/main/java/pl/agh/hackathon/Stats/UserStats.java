@@ -14,7 +14,7 @@ public class UserStats {
 
     @Id
     @Column(name = "user_id", nullable = false)
-    private String userId;
+    private long userId;
 
     @Column(nullable = false)
     private int totalAnswers;

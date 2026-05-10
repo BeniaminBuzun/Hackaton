@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserStatsResponse {
-    private String userId;
+    private long userId;
     private int totalAnswers;
     private int correctAnswers;
     private double accuracyPercent;

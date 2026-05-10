@@ -19,7 +19,7 @@ public class UserStatsService {
 
     // answers = { GENRE -> true, ARTISTS -> false, ... }
     @Transactional
-    public void recordAnswers(String userId, Map<QuestionType, Boolean> answers) {
+    public void recordAnswers(long userId, Map<QuestionType, Boolean> answers) {
         int total   = answers.size();
         int correct = (int) answers.values().stream().filter(Boolean::booleanValue).count();
 
@@ -62,7 +62,7 @@ public class UserStatsService {
         return Boolean.TRUE.equals(answers.get(type)) ? 1 : 0;
     }
 
-    public UserStatsResponse getStats(String userId) {
+    public UserStatsResponse getStats(long userId) {
         UserStats s = userStatsRepository.findById(userId)
                 .orElse(UserStats.builder().userId(userId).build());
 

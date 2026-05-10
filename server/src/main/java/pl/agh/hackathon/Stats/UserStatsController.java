@@ -33,7 +33,7 @@ public class UserStatsController {
     )
     public ResponseEntity<UserStatsResponse> getStats(
             @Parameter(description = "ID użytkownika", example = "user123")
-            @PathVariable String userId
+            @PathVariable long userId
     ) {
         return ResponseEntity.ok(userStatsService.getStats(userId));
     }
