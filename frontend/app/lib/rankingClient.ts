@@ -1,5 +1,6 @@
 import axios from "axios"
 
+
 export type RankingType =
   | "general"
   | "genre"
@@ -33,18 +34,11 @@ export type RankingQuery = {
 
 const typeToCategory = (type: RankingType): string => {
   switch (type) {
-    case "general":
-      return "OVERALL"
-    case "genre":
-      return "GENRE"
-    case "author":
-      return "ARTISTS"
-    case "song_name":
-      return "SONG_NAME"
-    case "time_period":
-      return "TIME_PERIOD"
-    default:
-      return "OVERALL"
+    case "general":     return "OVERALL"
+    case "genre":       return "GENRE"
+    case "author":      return "ARTISTS"
+    case "song_name":   return "SONG_NAME"
+    case "time_period": return "TIME_PERIOD"
   }
 }
 
