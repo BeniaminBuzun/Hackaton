@@ -4,10 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UsernameController {
 	private UserRepository userRepository;
@@ -17,10 +18,7 @@ public class UsernameController {
 	}
 
 	@GetMapping("/{userId}")
-	public String getUserName(@PathVariable long userId) {
-		Optional<User> user = userRepository.getById(userId);
-		if(user.isEmpty())
-			return "";
-		return user.get().getName();
+	public Optional<UserDTO> getUserName(@PathVariable long userId) {
+		return userRepository.getById(userId).map(u -> new UserDTO(u.getId(), u.getName()));
 	}
 }
