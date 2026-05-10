@@ -8,5 +8,6 @@ export default defineConfig({
   server: {
     port: 30127,
     host: "0.0.0.0",
+    allowedHosts: ["srv67.mikr.us"],
   },
 })
