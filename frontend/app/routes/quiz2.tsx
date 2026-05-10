@@ -8,11 +8,18 @@ export default function QuizRoute2() {
   const { isAuthenticated } = useRequireAuth();
   const location = useLocation();
   const data = location.state;
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [isAnswered, setIsAnswered] = useState(false);
   const navigate = useNavigate();
+
+  // NEW: track which answer button should turn green
+  const [correctIndex, setCorrectIndex] = useState<number | null>(null);
+  const [wrongIndex, setWrongIndex] = useState<number | null>(null);
+
+  // Reset green highlight when moving to next question
+  useEffect(() => {
+    setCorrectIndex(null);
+    setWrongIndex(null);
+  }, [currentIndex]);
 
   if (!isAuthenticated) {
     return null;
@@ -36,51 +43,34 @@ export default function QuizRoute2() {
 
   const currentItem = data.questionsForMusic[currentIndex];
   const isLastItem = currentIndex >= data.questionsForMusic.length - 1;
-  const correctAnswer = currentItem.questions[0].correctAnswer; // adjust path if needed
 
-  // Reset answer state when moving to next question
-  useEffect(() => {
-    setSelectedAnswer(null);
-    setIsAnswered(false);
-  }, [currentIndex]);
+const answerQuestion = (response: string, index: number) => {
+    console.log("sending POST to server");
+    console.log(response);
+    console.log(index)
+    if (index ==1) {
+      setCorrectIndex(index);
+      // setWrongIndex(2);
 
-  const answerQuestion = (response: string) => {
-    if (isAnswered) return; // prevent multiple answers
+    }
+    else {
+      setWrongIndex(index);
+      setCorrectIndex(1);
 
-    setSelectedAnswer(response);
-    setIsAnswered(true);
+    }
 
     if (!isLastItem) {
+
       setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
-      }, 800); // longer delay so user sees color feedback
+      }, 3000);
     } else {
       setTimeout(() => {
         navigate("/result");
-      }, 800);
+      }, 3000);
     }
   };
 
-  // Function to determine button styling based on answer state
-  const getButtonClass = (answer: string) => {
-    const baseClass =
-      "group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98] w-full";
-
-    if (!isAnswered) return baseClass;
-
-    // Show correct answer in green
-    if (answer === correctAnswer) {
-      return `${baseClass} bg-green-600/80 border-green-400 hover:bg-green-600/90`;
-    }
-
-    // Show user's wrong answer in red
-    if (answer === selectedAnswer && answer !== correctAnswer) {
-      return `${baseClass} bg-red-600/80 border-red-400 hover:bg-red-600/90`;
-    }
-
-    // Other non-selected, non-correct answers become dimmed
-    return `${baseClass} opacity-50 cursor-not-allowed`;
-  };
 
   return (
     <div className="min-h-screen">
@@ -106,7 +96,8 @@ export default function QuizRoute2() {
         {/* Player Card */}
         <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-6 shadow-[0_0_60px_rgba(34,211,238,0.15)] backdrop-blur-sm">
           <AudioVisualizer audioUrl={"http://" + currentItem.songUrl} />
-          {/* <AudioVisualizer audioUrl="/skolim.mp3" /> */}
+
+          <AudioVisualizer audioUrl="/skolim.mp3" />
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-black/40 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -123,16 +114,24 @@ export default function QuizRoute2() {
           {currentItem.questions[0].answers.map((answer: string, index: number) => (
             <button
               key={index}
-              onClick={() => answerQuestion(answer)}
-              disabled={isAnswered}
-              className={getButtonClass(answer)}
+              onClick={() => answerQuestion(answer, index)}
+              className={`group relative overflow-hidden rounded-2xl border px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98] 
+                ${correctIndex === index
+                  ? 'bg-green-500/20 border-green-400' 
+                  : ''
+
+              } ${wrongIndex === index
+                  ? 'bg-red-500/20 border-red-400' 
+                  :'' }`}
             >
+              {/* Subtle glow on hover (unchanged) */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-fuchsia-500/0 opacity-0 transition-opacity duration-300 group-hover:from-cyan-500/10 group-hover:to-fuchsia-500/10 group-hover:opacity-100" />
               <span className="relative z-10 font-sans text-lg font-medium">
                 {answer}
               </span>
             </button>
           ))}
+
         </div>
       </div>
     </div>
