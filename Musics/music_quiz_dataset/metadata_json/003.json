@@ -1,0 +1,12 @@
+{
+  "title": "Back In Black",
+  "artist": "AC/DC",
+  "genre": "Hard Rock",
+  "album": "Back In Black",
+  "release_date": "1980-07-25T07:00:00Z",
+  "duration_ms": 256000,
+  "explicit": "notExplicit",
+  "country": "USA",
+  "audio_file": "003.m4a",
+  "artwork_file": "003.jpg"
+}

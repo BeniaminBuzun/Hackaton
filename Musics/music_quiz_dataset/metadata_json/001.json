@@ -1,0 +1,12 @@
+{
+  "title": "One",
+  "artist": "Metallica",
+  "genre": "Metal",
+  "album": "...And Justice for All (Deluxe Box Set)",
+  "release_date": "1988-08-25T07:00:00Z",
+  "duration_ms": 446146,
+  "explicit": "notExplicit",
+  "country": "USA",
+  "audio_file": "001.m4a",
+  "artwork_file": "001.jpg"
+}
