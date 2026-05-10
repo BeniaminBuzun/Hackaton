@@ -43,8 +43,8 @@ export default function SettingsPage() {
     };
     console.log("Settings values:", formData);
     setTimeout(() => {
-      navigate("/quiz2", { state: { settings: formData } });
-    }
+      navigate("/quiz2", { state: formData });
+    }, 1000);
 
   };
 

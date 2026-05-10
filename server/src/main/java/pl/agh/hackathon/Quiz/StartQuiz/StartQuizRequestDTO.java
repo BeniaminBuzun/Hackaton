@@ -12,7 +12,7 @@ public class StartQuizRequestDTO {
     @Size(min=4, max=4)
     public Map<QuestionType, Boolean> options;
 
-    public boolean retake = false;
+        public boolean retake = false;
 
     @NotBlank
     @Positive
