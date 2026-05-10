@@ -32,7 +32,7 @@ public class UserStatsController {
             }
     )
     public ResponseEntity<UserStatsResponse> getStats(
-            @Parameter(description = "ID użytkownika", example = "user123")
+            @Parameter(description = "ID użytkownika", example = "1")
             @PathVariable long userId
     ) {
         return ResponseEntity.ok(userStatsService.getStats(userId));
