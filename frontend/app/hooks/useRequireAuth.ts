@@ -8,9 +8,7 @@ type RequireAuthState = {
 }
 
 export const useRequireAuth = (): RequireAuthState => {
-    // TODO: uncomment
-    //   const { isAuthenticated } = useAuth()
-  const  isAuthenticated = true
+  const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
 
