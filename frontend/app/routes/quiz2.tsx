@@ -3,6 +3,8 @@ import MusicPlayer from "@components/musicPlayer";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useRequireAuth } from "../hooks/useRequireAuth";
+import axios from 'axios';
+import { getUserId } from "@/lib/authStore";
 
 export default function QuizRoute2() {
   const { isAuthenticated } = useRequireAuth();
@@ -10,6 +12,7 @@ export default function QuizRoute2() {
   const data = location.state;
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+  const userId = getUserId()
 
   // NEW: track which answer button should turn green
   const [correctIndex, setCorrectIndex] = useState<number | null>(null);
@@ -43,19 +46,28 @@ export default function QuizRoute2() {
 
   const currentItem = data.questionsForMusic[currentIndex];
   const isLastItem = currentIndex >= data.questionsForMusic.length - 1;
+  async function sendQuizRequest(response: string, index: number,id:Number) {
+    const url = 'http://localhost:8081/api/quizes/answers';
+    const body = {
+    "answerId": id,
+    "answer":response,
+    "userId":userId
+};
 
-const answerQuestion = (response: string, index: number) => {
-    console.log("sending POST to server");
-    console.log(response);
-    console.log(index)
-    if (index ==1) {
-      setCorrectIndex(index);
-      // setWrongIndex(2);
+    try {
+      const response = await axios.post(url, body, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log(  'Response:', response.data);
+      console.log("sending POST to server");
+      console.log(response.data);
+      console.log(index)
+      if (index ==1) {
+        setCorrectIndex(index);
 
     }
     else {
       setWrongIndex(index);
-      setCorrectIndex(1);
 
     }
 
@@ -63,12 +75,21 @@ const answerQuestion = (response: string, index: number) => {
 
       setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
-      }, 3000);
+      }, 30);
     } else {
       setTimeout(() => {
-        navigate("/result");
-      }, 3000);
+        console.log("Quiz finished, navigating to results",data.quizId);
+        navigate("/result",{state:{quizId: data.quizId}});
+      }, 30);
     }
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+const answerQuestion = (response: string, index: number,id:Number) => {
+  sendQuizRequest(response, index,id) 
   };
 
 
@@ -111,10 +132,10 @@ const answerQuestion = (response: string, index: number) => {
 
         {/* Answers Grid */}
         <div className="grid gap-5 md:grid-cols-2">
-          {currentItem.questions[0].answers.map((answer: string, index: number) => (
+          {currentItem.questions[0].answers.map((answer: string, index: number,) => (
             <button
               key={index}
-              onClick={() => answerQuestion(answer, index)}
+              onClick={() => answerQuestion(answer, index,data.questionsForMusic[currentIndex].questions[0].id)}
               className={`group relative overflow-hidden rounded-2xl border px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98] 
                 ${correctIndex === index
                   ? 'bg-green-500/20 border-green-400' 
