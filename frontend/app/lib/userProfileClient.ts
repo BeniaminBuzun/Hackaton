@@ -10,6 +10,27 @@ export type UserStats = {
   percentCorrect: number
 }
 
+type UserStatsApiResponse = {
+  userId: number
+  totalAnswers: number
+  correctAnswers: number
+  accuracyPercent: number
+}
+
+type UserApiResponse = {
+  userId: number
+  username: string
+}
+
+const DEFAULT_API_BASE_URL = "http://127.0.0.1:8081"
+const API_BASE_URL =
+  (import.meta as ImportMeta).env?.VITE_API_BASE_URL ?? DEFAULT_API_BASE_URL
+
+const getStatsUrl = (userId: string) =>
+  new URL(`/api/stats/${userId}`, API_BASE_URL).toString()
+const getUsernameUrl = (userId: string) =>
+  new URL(`/user/${userId}`, API_BASE_URL).toString()
+
 export type UserProfile = {
   userId: string
   name: string
@@ -21,22 +42,26 @@ export const fetchUserProfile = async (
   userId: string,
   signal?: AbortSignal
 ): Promise<UserProfile> => {
-  const response = await fetch(`/api/users/${userId}/profile`, { signal })
+  const [statsResponse, nameResponse] = await Promise.all([
+    fetch(getStatsUrl(userId), { signal }),
+    fetch(getUsernameUrl(userId), { signal }),
+  ])
 
-  if (!response.ok) {
+  if (!statsResponse.ok || !nameResponse.ok) {
     throw new Error("Unable to load user profile")
   }
 
-  const payload = (await response.json()) as UserProfile
+  const statsPayload = (await statsResponse.json()) as UserStatsApiResponse
+  const namePayload = (await nameResponse.json()) as UserApiResponse
 
   return {
-    userId: payload.userId ?? userId,
-    name: payload.name ?? "Unknown user",
-    badges: payload.badges ?? [],
+    userId: String(statsPayload.userId ?? userId),
+    name: namePayload.username.length > 0 ? namePayload.username : "Unknown user",
+    badges: [],
     stats: {
-      totalQuizzes: payload.stats?.totalQuizzes ?? 0,
-      totalAnswers: payload.stats?.totalAnswers ?? 0,
-      percentCorrect: payload.stats?.percentCorrect ?? 0,
+      totalQuizzes: 0,
+      totalAnswers: statsPayload.totalAnswers ?? 0,
+      percentCorrect: statsPayload.accuracyPercent ?? 0,
     },
   }
 }
