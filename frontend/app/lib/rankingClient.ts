@@ -1,10 +1,20 @@
-export type RankingType = "general" | "genre" | "author"
+import axios from "axios"
+
+export type RankingType =
+  | "general"
+  | "genre"
+  | "author"
+  | "song_name"
+  | "time_period"
 
 export type RankingEntry = {
-  position: number
-  name: string
-  userId?: string | number
+  rank: number
+  username: string
+  userId: number
   score: number
+  accuracyPercent: number
+  totalAnswers: number
+  correctAnswers: number
 }
 
 export type RankingResponse = {
@@ -21,29 +31,56 @@ export type RankingQuery = {
   pageSize: number
 }
 
+const typeToCategory = (type: RankingType): string => {
+  switch (type) {
+    case "general":
+      return "OVERALL"
+    case "genre":
+      return "GENRE"
+    case "author":
+      return "ARTISTS"
+    case "song_name":
+      return "SONG_NAME"
+    case "time_period":
+      return "TIME_PERIOD"
+    default:
+      return "OVERALL"
+  }
+}
+
 export const fetchRankings = async (
   query: RankingQuery,
   signal?: AbortSignal
 ): Promise<RankingResponse> => {
-  const params = new URLSearchParams({
-    type: query.type,
-    page: String(query.page),
-    pageSize: String(query.pageSize),
-  })
+  const response = await axios.get(
+    "http://localhost:8081/api/stats/leaderboard",
+    {
+      params: {
+        page: query.page,
+        limit: query.pageSize,
+        category: typeToCategory(query.type),
+      },
+      signal,
+    }
+  )
 
-  const response = await fetch(`/api/rankings?${params.toString()}`, { signal })
+  const payload = response.data
 
-  if (!response.ok) {
-    throw new Error("Unable to load rankings")
-  }
-
-  const payload = (await response.json()) as RankingResponse
+  const items: RankingEntry[] = (payload.data ?? []).map((entry: any) => ({
+    rank: entry.rank,
+    username: entry.username,
+    userId: entry.userId,
+    score: entry.accuracyPercent,
+    accuracyPercent: entry.accuracyPercent,
+    totalAnswers: entry.totalAnswers,
+    correctAnswers: entry.correctAnswers,
+  }))
 
   return {
-    items: payload.items ?? [],
-    page: payload.page ?? query.page,
-    pageSize: payload.pageSize ?? query.pageSize,
-    totalPages: payload.totalPages ?? 1,
-    totalItems: payload.totalItems ?? payload.items?.length ?? 0,
+    items,
+    page: payload.meta?.page ?? query.page,
+    pageSize: payload.meta?.limit ?? query.pageSize,
+    totalPages: payload.meta?.totalPages ?? 1,
+    totalItems: payload.meta?.totalPlayers ?? items.length,
   }
 }
