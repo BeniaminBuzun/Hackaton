@@ -5,147 +5,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6202f7d-6ccb-4ec0-b895-0197db5b4a9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Musics/generate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/importer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artists.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/001.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/002.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/003.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/004.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/005.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/006.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/007.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/008.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/009.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/010.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/011.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/012.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/013.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/014.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/015.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/016.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/017.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/018.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/019.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/020.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/021.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/022.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/023.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/024.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/025.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/026.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/027.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/028.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/029.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/artwork/030.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/001.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/002.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/003.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/004.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/005.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/006.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/007.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/008.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/009.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/010.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/011.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/012.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/013.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/014.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/015.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/016.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/017.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/018.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/019.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/020.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/021.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/022.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/023.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/024.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/025.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/026.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/027.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/028.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/029.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/030.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/genres.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/001.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/002.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/003.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/004.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/005.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/006.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/007.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/008.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/009.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/010.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/011.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/012.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/013.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/014.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/015.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/016.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/017.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/018.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/019.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/020.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/021.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/022.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/023.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/024.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/025.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/026.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/027.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/028.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/029.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/030.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/app/hooks/useRanking.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/app/lib/rankingClient.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/app/routes/leaderboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/app/routes/quiz2.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/components/audiovis.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/components/musicPlayer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/public/skolim.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Artists/Artist.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Genre/Genre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/EndQuiz/EndQuizResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/EndQuiz/QuestionSummaryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/SendAnswser/SendAnswerDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/SendAnswser/SendAnswerResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/QuestionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/QuestionForMusic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/StartQuiz.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/StartQuizRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/StartQuizResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Songs/Song.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/answer/Answer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/question/Question.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/audio/031.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Musics/music_quiz_dataset/metadata_json/031.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/hooks/useAuth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/hooks/useRequireAuth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/hooks/useUserProfile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/lib/apiClient.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/lib/authClient.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/lib/authStore.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/lib/userProfileClient.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/routes/login.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/routes/register.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/routes/settings.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/app/routes/user-profile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Artists/ArtistRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Genre/GenreRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Handlers/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Login/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Login/Registration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Login/RegistrationDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Login/ResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/QuizRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/QuestionGeneratorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/StartQuizService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Songs/SongRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/User/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/answer/AnswerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/question/QuestionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/test/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/agh/hackathon/HackathonApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/lib/quizClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/lib/quizClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/lib/rankingClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/lib/rankingClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/root.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/app/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/app/routes/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/routes/home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/routes/leaderboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/routes/leaderboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/routes/quiz.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/routes/quiz.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/app/routes/quiz2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/routes/quiz2.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/app/routes/result.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/app/routes/result.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/components/audiovis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/components/audiovis.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quiz.db" beforeDir="false" afterPath="$PROJECT_DIR$/quiz.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/HackathonApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/QuestionType/QuestionTypes.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/Quiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStatsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStatsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStatsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStatsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStatsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStatsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStatsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Stats/UserStatsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/SendAnswser/SendAnswerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/SendAnswser/SendAnswerDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/StartQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/StartQuiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/StartQuizRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Quiz/StartQuiz/StartQuizRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Songs/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/Songs/Song.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/User/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/test/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/answer/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/answer/Answer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/question/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/agh/hackathon/question/Question.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/agh/hackathon/HackathonApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +86,7 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="server" type="f1a62948:ProjectNode" />
+                <item name="hackathon" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -202,28 +123,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle./home/pieter/Desktop/Hackaton/server.executor": "Run",
-    "Gradle.Build server.executor": "Run",
-    "Gradle.server.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.HackathonApplication.executor": "Run",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "Merging PP__STATS__ENDPOINT",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/pieter/Desktop/Hackaton/server",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle./home/pieter/Desktop/Hackaton/server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.server.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.HackathonApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging PP__STATS__ENDPOINT&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/pieter/Desktop/Hackaton/server&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f6202f7d-6ccb-4ec0-b895-0197db5b4a9b" name="Changes" comment="" />

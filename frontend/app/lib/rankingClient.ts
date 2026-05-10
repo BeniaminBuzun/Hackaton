@@ -3,6 +3,7 @@ export type RankingType = "general" | "genre" | "author"
 export type RankingEntry = {
   position: number
   name: string
+  userId?: string | number
   score: number
 }
 

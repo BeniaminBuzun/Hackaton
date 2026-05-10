@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   Meta,
   Outlet,
@@ -8,9 +9,13 @@ import {
 } from "react-router"
 
 import type { Route } from "./+types/root"
+import { Button } from "@components/button"
 import "@styles/globals.css"
+import { useAuth } from "./hooks/useAuth"
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const { isAuthenticated, logout } = useAuth()
+
   return (
     <html lang="en" className="dark">
       <head>
@@ -33,21 +38,38 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <header className="relative mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
             <div className="flex items-center gap-3">
               <span className="inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 via-fuchsia-500 to-emerald-400 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-black shadow-[0_0_30px_rgba(34,211,238,0.55)]">
-                NC
+                MQ
               </span>
               <div className="leading-tight">
                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                  Neon Club
+                  
                 </p>
-                <p className="text-lg font-semibold">Pulse Quiz</p>
+                <p className="text-lg font-semibold">Music Quizzer</p>
               </div>
             </div>
-            <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
-              <span className="text-foreground/90">Tonight</span>
-              <span>Dancefloor</span>
-              <span>Scores</span>
-              <span>Club</span>
-            </nav>
+            <div className="flex items-center gap-4">
+              <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
+                <Link to="/">Home</Link>
+                <Link to="/quiz">Quiz</Link>
+                <Link to="/settings">Settings</Link>
+              </nav>
+              <div className="flex items-center gap-2">
+                {isAuthenticated ? (
+                  <Button size="sm" variant="outline" onClick={logout}>
+                    Log out
+                  </Button>
+                ) : (
+                  <>
+                    <Button asChild size="sm" variant="ghost">
+                      <Link to="/login">Log in</Link>
+                    </Button>
+                    <Button asChild size="sm">
+                      <Link to="/register">Register</Link>
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
           </header>
 
           <main className="relative mx-auto w-full max-w-6xl px-6 pb-16">
