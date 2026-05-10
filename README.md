@@ -56,3 +56,5 @@ Dostajemy w results:
 - pytanie wraz z poprawną odpowiedzią oraz informacją czy dobrze na nią odpowiedzieliśmy
 
 
+4. Model bazy danych
+![baza.png](baza.png)
