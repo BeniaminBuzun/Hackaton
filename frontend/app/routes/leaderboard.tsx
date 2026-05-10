@@ -76,12 +76,8 @@ function LeaderboardContent() {
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">
               Live leaderboard
             </p>
-            <h1 className="text-3xl font-semibold text-white md:text-5xl">
-              Neon rankings, zero latency.
-            </h1>
             <p className="max-w-2xl text-base text-white/70 md:text-lg">
-              Track the best runs across the club, switch the lens, and
-              re-sync with the latest scores.
+              Compare your results with your friends.
             </p>
           </div>
 
