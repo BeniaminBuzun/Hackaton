@@ -6,15 +6,15 @@
 ##  prezentuje
 # Music Guesser
 
-Celem zespołu jest wykonanie aplikacji, która ułatwi użytkownikom zapoznywanie się z różnymi gatunkami muzycznymi, zespołami, czy pojedycznymi utworami.
+Celem zespołu jest wykonanie aplikacji, która ułatwi użytkownikom zapoznawanie się z różnymi gatunkami muzycznymi, zespołami, czy pojedycznymi utworami.
 Użytkownik może utworzyć quiz według swoich preferencji, a następnie, słuchając utworów, odgadywać gatunek, autora (zespół muzyczny), a nawet przedział czasowy w którym dany utwór powstał.
 Po wejściu na ekran główny użytkownik może się zarejestrować lub zalogować podając nazwę użytkownika oraz hasło.
-Po udanym logowaniu, użytkownik może zobaczyć swój profil, statystyki oraz rankingi, lub rozpocząć quiz.
+Po udanym logowaniu, użytkownik może zobaczyć swój profil, statystyki oraz rankingi lub rozpocząć quiz.
 Rozpoczęcie "szybkiego quizu" nie wymaga zalogowania użytkownika.
 Zalogowany użytkownik może przed rozpoczęciem quizu dostosować jego zakres i typ pytań.
 Podczas trwania quizu, użytkownik wybiera jedną z dostępnych odpowiedzi a następnie otrzymuje informację o poprawnej odpowiedzi.
 Przechodzi do następnego pytania przez naciśnięcie odpowiedniego przycisku.
-Po zakończeniu quizu, użytkownik może zobaczyć podsumowanie quizu. Następnie może powwtórzyć quiz lub powrócić do strony głównej aplikacji.
+Po zakończeniu quizu, użytkownik może zobaczyć podsumowanie quizu. Następnie może powtórzyć quiz lub powrócić do strony głównej aplikacji.
 Pomoże to chętnym użytkownikom zorientować się w świecie muzycznym lub zapoznać się z nowymi gatunkami, utworami czy zespołami.
 
 
