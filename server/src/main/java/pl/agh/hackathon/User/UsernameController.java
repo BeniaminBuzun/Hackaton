@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/api/users")
+@RequestMapping("/user")
 public class UsernameController {
 	private UserRepository userRepository;
 
