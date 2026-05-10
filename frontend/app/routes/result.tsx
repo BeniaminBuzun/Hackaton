@@ -95,7 +95,7 @@ export default function ResultRoute() {
   }
 
   // Calculate totals
-  const totalPossiblePoints = quizResults.reduce((sum, q) => sum + q.points, 0);
+  const totalPossiblePoints = quizResults.length;
   const earnedPoints = quizResults.reduce(
     (sum, q) => sum + (q.answer === q.correctAnswer ? q.points : 0),
     0

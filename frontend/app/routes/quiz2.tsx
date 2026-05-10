@@ -76,12 +76,12 @@ export default function QuizRoute2() {
 
       setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
-      }, 30);
+      }, 3000);
     } else {
       setTimeout(() => {
         console.log("Quiz finished, navigating to results",data.quizId);
         navigate("/result",{state:{quizId: data.quizId}});
-      }, 30);
+      }, 3000);
     }
 
     } catch (error) {
