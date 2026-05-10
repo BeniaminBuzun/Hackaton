@@ -56,6 +56,7 @@ POST /api/quizes/answers
 
 Bierzemy do Body:
 - answer id
+- user id
 - treść odpowiedzi udzielonej przez użytkownika
 
 Zwracamy w Response:
