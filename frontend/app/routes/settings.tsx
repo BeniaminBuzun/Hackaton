@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { Button } from "@components/button";
+import { useNavigate } from "react-router"
 
 type SettingsForm = {
   numQuestions: number;
@@ -15,6 +16,8 @@ type SettingsForm = {
 };
 
 export default function SettingsPage() {
+  const navigate = useNavigate();
+
   const [numQuestions, setNumQuestions] = useState(5);
   const [genre, setGenre] = useState("none"); // "none" means no genre selected
   const [questionTypes, setQuestionTypes] = useState({
@@ -39,6 +42,10 @@ export default function SettingsPage() {
       questionTypes,
     };
     console.log("Settings values:", formData);
+    setTimeout(() => {
+      navigate("/quiz2", { state: { settings: formData } });
+    }
+
   };
 
   return (
@@ -72,7 +79,7 @@ export default function SettingsPage() {
               <input
                 type="number"
                 min={1}
-                max={50}
+                max={150}
                 value={numQuestions}
                 onChange={(e) => setNumQuestions(parseInt(e.target.value) || 1)}
                 className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition-all focus:border-cyan-400/50 focus:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
@@ -178,7 +185,7 @@ export default function SettingsPage() {
                 size="lg"
                 className="h-11 px-6 text-base"
               >
-                GO → Start quiz
+                Start quiz
               </Button>
               <Button asChild variant="outline" size="lg" className="h-11 px-6 text-base">
                 <Link to="/">Back home</Link>
