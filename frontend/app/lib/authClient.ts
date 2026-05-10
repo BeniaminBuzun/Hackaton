@@ -8,7 +8,7 @@ type AuthResponse = {
   id?: string | number
 }
 
-const DEFAULT_API_BASE_URL = "http://127.0.0.1:8081"
+const DEFAULT_API_BASE_URL = "http://localhost:8081"
 const API_BASE_URL =
   (import.meta as ImportMeta).env?.VITE_API_BASE_URL ?? DEFAULT_API_BASE_URL
 
@@ -56,7 +56,9 @@ const requestAuth = async (
     throw new Error(message)
   }
 
-  const data = (await response.json().catch(() => ({}))) as Partial<AuthResponse>
+  const data = (await response
+    .json()
+    .catch(() => ({}))) as Partial<AuthResponse>
   const resolvedUserId = data.userId ?? data.id
 
   if (resolvedUserId === undefined || resolvedUserId === null) {
@@ -66,7 +68,8 @@ const requestAuth = async (
   return { userId: String(resolvedUserId) }
 }
 
-export const login = (payload: AuthRequest) => requestAuth(LOGIN_ENDPOINT, payload)
+export const login = (payload: AuthRequest) =>
+  requestAuth(LOGIN_ENDPOINT, payload)
 
 export const register = (payload: AuthRequest) =>
   requestAuth(REGISTER_ENDPOINT, payload)

@@ -27,7 +27,7 @@ public class StartQuiz {
     @Autowired
     private UserRepository userRepository;
 
-    @Value("${server.address}")
+    @Value("${app.base-url}")
     private String serverAddress;
 
     @Value("${server.port}")

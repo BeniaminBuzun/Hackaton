@@ -1,34 +1,38 @@
-import AudioVisualizer from "@components/audiovis";
-import MusicPlayer from "@components/musicPlayer";
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
-import { useRequireAuth } from "../hooks/useRequireAuth";
-import axios from 'axios';
-import { getUserId } from "@/lib/authStore";
+import AudioVisualizer from "@components/audiovis"
+import MusicPlayer from "@components/musicPlayer"
+import React, { useState, useEffect } from "react"
+import { useLocation, useNavigate } from "react-router"
+import { useRequireAuth } from "../hooks/useRequireAuth"
+import axios from "axios"
+import { getUserId } from "@/lib/authStore"
+
+const DEFAULT_API_BASE_URL = "http://localhost:8081"
+const API_BASE_URL =
+  (import.meta as ImportMeta).env?.VITE_API_BASE_URL ?? DEFAULT_API_BASE_URL
 
 export default function QuizRoute2() {
-  const { isAuthenticated } = useRequireAuth();
-  const location = useLocation();
-  const data = location.state;
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const navigate = useNavigate();
+  const { isAuthenticated } = useRequireAuth()
+  const location = useLocation()
+  const data = location.state
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const navigate = useNavigate()
   const userId = getUserId()
 
   // NEW: track which answer button should turn green
-  const [correctIndex, setCorrectIndex] = useState<number | null>(null);
-  const [wrongIndex, setWrongIndex] = useState<number | null>(null);
+  const [correctIndex, setCorrectIndex] = useState<number | null>(null)
+  const [wrongIndex, setWrongIndex] = useState<number | null>(null)
 
   // Reset green highlight when moving to next question
   useEffect(() => {
-    setCorrectIndex(null);
-    setWrongIndex(null);
-  }, [currentIndex]);
+    setCorrectIndex(null)
+    setWrongIndex(null)
+  }, [currentIndex])
 
   if (!isAuthenticated) {
-    return null;
+    return null
   }
 
-  console.log(data.questionsForMusic.length);
+  console.log(data.questionsForMusic.length)
   if (!data || !data.questionsForMusic || data.questionsForMusic.length === 0) {
     return (
       <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col items-center justify-center gap-10 pt-6">
@@ -41,58 +45,52 @@ export default function QuizRoute2() {
           </p>
         </section>
       </div>
-    );
+    )
   }
 
-  const currentItem = data.questionsForMusic[currentIndex];
-  const isLastItem = currentIndex >= data.questionsForMusic.length - 1;
-  async function sendQuizRequest(response: string, index: number,id:Number) {
-    const url = 'http://localhost:8081/api/quizes/answers';
+  const currentItem = data.questionsForMusic[currentIndex]
+  const isLastItem = currentIndex >= data.questionsForMusic.length - 1
+  async function sendQuizRequest(response: string, index: number, id: Number) {
+    const url = new URL("/api/quizes/answers", API_BASE_URL).toString()
     const body = {
-    "quizId": data.quizId,
-    "answer":response,
-    "questionId":currentItem.questions[0].id,
-    "userId": userId
-};
+      quizId: data.quizId,
+      answer: response,
+      questionId: currentItem.questions[0].id,
+      userId: userId,
+    }
 
     try {
       const response = await axios.post(url, body, {
-        headers: { 'Content-Type': 'application/json' },
-      });
-      console.log(  'Response:', response.data);
-      console.log("sending POST to server");
-      console.log(response.data);
+        headers: { "Content-Type": "application/json" },
+      })
+      console.log("Response:", response.data)
+      console.log("sending POST to server")
+      console.log(response.data)
       console.log(index)
-      if (index ==1) {
-        setCorrectIndex(index);
+      if (index == 1) {
+        setCorrectIndex(index)
+      } else {
+        setWrongIndex(index)
+      }
 
-    }
-    else {
-      setWrongIndex(index);
-
-    }
-
-    if (!isLastItem) {
-
-      setTimeout(() => {
-        setCurrentIndex((prev) => prev + 1);
-      }, 30);
-    } else {
-      setTimeout(() => {
-        console.log("Quiz finished, navigating to results",data.quizId);
-        navigate("/result",{state:{quizId: data.quizId}});
-      }, 30);
-    }
-
+      if (!isLastItem) {
+        setTimeout(() => {
+          setCurrentIndex((prev) => prev + 1)
+        }, 30)
+      } else {
+        setTimeout(() => {
+          console.log("Quiz finished, navigating to results", data.quizId)
+          navigate("/result", { state: { quizId: data.quizId } })
+        }, 30)
+      }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error)
     }
   }
 
-const answerQuestion = (response: string, index: number,id:Number) => {
-  sendQuizRequest(response, index,id) 
-  };
-
+  const answerQuestion = (response: string, index: number, id: Number) => {
+    sendQuizRequest(response, index, id)
+  }
 
   return (
     <div className="min-h-screen">
@@ -100,16 +98,16 @@ const answerQuestion = (response: string, index: number,id:Number) => {
         {/* Header */}
         <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-black/90 via-slate-950/80 to-black/90 px-8 py-10 text-center shadow-[0_0_60px_rgba(34,211,238,0.25)]">
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute right-10 top-10 h-28 w-28 rounded-full bg-cyan-400/20 blur-3xl" />
+            <div className="absolute top-10 right-10 h-28 w-28 rounded-full bg-cyan-400/20 blur-3xl" />
             <div className="absolute bottom-6 left-16 h-24 w-24 rounded-full bg-fuchsia-500/20 blur-2xl" />
-            <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400/15 blur-[90px]" />
+            <div className="absolute top-1/2 left-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400/15 blur-[90px]" />
           </div>
 
           <div className="relative z-10">
             <h1 className="text-3xl font-semibold tracking-wide text-white md:text-5xl">
               Music Quiz
             </h1>
-            <p className="mt-3 text-sm font-semibold uppercase tracking-[0.3em] text-white/50">
+            <p className="mt-3 text-sm font-semibold tracking-[0.3em] text-white/50 uppercase">
               {/* Track {currentIndex + 1} of {data.questionsForMusic.length} */}
             </p>
           </div>
@@ -120,7 +118,7 @@ const answerQuestion = (response: string, index: number,id:Number) => {
           <AudioVisualizer audioUrl={"http://" + currentItem.songUrl} />
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-black/40 p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
+            <p className="text-xs font-semibold tracking-[0.3em] text-cyan-400 uppercase">
               Question
             </p>
             <p className="mt-2 text-lg font-medium text-white">
@@ -131,29 +129,35 @@ const answerQuestion = (response: string, index: number,id:Number) => {
 
         {/* Answers Grid */}
         <div className="grid gap-5 md:grid-cols-2">
-          {currentItem.questions[0].answers.map((answer: string, index: number,) => (
-            <button
-              key={index}
-              onClick={() => answerQuestion(answer, index,data.questionsForMusic[currentIndex].questions[0].id)}
-              className={`group relative overflow-hidden rounded-2xl border px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98] 
-                ${correctIndex === index
-                  ? 'bg-green-500/20 border-green-400' 
-                  : ''
-
-              } ${wrongIndex === index
-                  ? 'bg-red-500/20 border-red-400' 
-                  :'' }`}
-            >
-              {/* Subtle glow on hover (unchanged) */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-fuchsia-500/0 opacity-0 transition-opacity duration-300 group-hover:from-cyan-500/10 group-hover:to-fuchsia-500/10 group-hover:opacity-100" />
-              <span className="relative z-10 font-sans text-lg font-medium">
-                {answer}
-              </span>
-            </button>
-          ))}
-
+          {currentItem.questions[0].answers.map(
+            (answer: string, index: number) => (
+              <button
+                key={index}
+                onClick={() =>
+                  answerQuestion(
+                    answer,
+                    index,
+                    data.questionsForMusic[currentIndex].questions[0].id
+                  )
+                }
+                className={`group relative overflow-hidden rounded-2xl border px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98] ${
+                  correctIndex === index
+                    ? "border-green-400 bg-green-500/20"
+                    : ""
+                } ${
+                  wrongIndex === index ? "border-red-400 bg-red-500/20" : ""
+                }`}
+              >
+                {/* Subtle glow on hover (unchanged) */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-fuchsia-500/0 opacity-0 transition-opacity duration-300 group-hover:from-cyan-500/10 group-hover:to-fuchsia-500/10 group-hover:opacity-100" />
+                <span className="relative z-10 font-sans text-lg font-medium">
+                  {answer}
+                </span>
+              </button>
+            )
+          )}
         </div>
       </div>
     </div>
-  );
+  )
 }

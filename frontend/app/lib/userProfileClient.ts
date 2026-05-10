@@ -22,7 +22,7 @@ type UserApiResponse = {
   username: string
 }
 
-const DEFAULT_API_BASE_URL = "http://127.0.0.1:8081"
+const DEFAULT_API_BASE_URL = "http://localhost:8081"
 const API_BASE_URL =
   (import.meta as ImportMeta).env?.VITE_API_BASE_URL ?? DEFAULT_API_BASE_URL
 
@@ -56,7 +56,8 @@ export const fetchUserProfile = async (
 
   return {
     userId: String(statsPayload.userId ?? userId),
-    name: namePayload.username.length > 0 ? namePayload.username : "Unknown user",
+    name:
+      namePayload.username.length > 0 ? namePayload.username : "Unknown user",
     badges: [],
     stats: {
       totalQuizzes: 0,

@@ -1,5 +1,9 @@
 import axios from "axios"
 
+const DEFAULT_API_BASE_URL = "http://localhost:8081"
+const API_BASE_URL =
+  (import.meta as ImportMeta).env?.VITE_API_BASE_URL ?? DEFAULT_API_BASE_URL
+
 export type RankingType =
   | "general"
   | "genre"
@@ -53,7 +57,7 @@ export const fetchRankings = async (
   signal?: AbortSignal
 ): Promise<RankingResponse> => {
   const response = await axios.get(
-    "http://localhost:8081/api/stats/leaderboard",
+    new URL("/api/stats/leaderboard", API_BASE_URL).toString(),
     {
       params: {
         page: query.page,
