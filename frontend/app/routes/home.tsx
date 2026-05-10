@@ -2,10 +2,11 @@ import { Link,useNavigate } from "react-router"
 
 import { Button } from "@components/button"
 import axios from 'axios';
-import { use } from "react";
 import { getUserId } from "@/lib/authStore";
+import { useAuth } from "@/hooks/useAuth";
 export default function Home() {
   // Placeholder variables for scores
+  const { isAuthenticated } = useAuth()
   const userId = getUserId()
   const last10DaysScore = 12580 
   const globalScore = 98420
@@ -15,6 +16,13 @@ export default function Home() {
   const bottomStats = ["Daily Challenges", "Global Ranking", "10-Day Streak"]
   const navigate = useNavigate();
   async function sendQuizRequest() {
+    if (!isAuthenticated) {
+      navigate("/login", {
+        replace: true,
+        state: { from: location.pathname },
+      })
+      return
+    }
     const url = 'http://localhost:8081/api/quizes';
     const body = {
       options: {
