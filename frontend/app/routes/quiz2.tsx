@@ -118,8 +118,6 @@ const answerQuestion = (response: string, index: number,id:Number) => {
         <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-6 shadow-[0_0_60px_rgba(34,211,238,0.15)] backdrop-blur-sm">
           <AudioVisualizer audioUrl={"http://" + currentItem.songUrl} />
 
-          <AudioVisualizer audioUrl="/skolim.mp3" />
-
           <div className="mt-8 rounded-2xl border border-white/10 bg-black/40 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
               Question
