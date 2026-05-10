@@ -49,9 +49,10 @@ export default function QuizRoute2() {
   async function sendQuizRequest(response: string, index: number,id:Number) {
     const url = 'http://localhost:8081/api/quizes/answers';
     const body = {
-    "answerId": id,
+    "quizId": data.quizId,
     "answer":response,
-    "userId":userId
+    "questionId":currentItem.questions[0].id,
+    "userId": userId
 };
 
     try {
