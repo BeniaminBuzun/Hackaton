@@ -34,8 +34,8 @@ public class Answer {
 	private User user;
 
 	@Column(name="correctValue", nullable=false)
-	private int correct;
+	private String correct;
 
 	@Column(name="answer", nullable=true)
-	private Integer answer;
+	private String answer;
 }
