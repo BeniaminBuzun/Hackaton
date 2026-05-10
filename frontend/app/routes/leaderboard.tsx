@@ -7,10 +7,32 @@ import { useRequireAuth } from "../hooks/useRequireAuth"
 import { useRanking } from "../hooks/useRanking"
 import type { RankingType } from "../lib/rankingClient"
 
-const rankingOptions: Array<{ value: RankingType; label: string; helper: string }> = [
-  { value: "general", label: "General", helper: "All-time club energy" },
-  { value: "genre", label: "Genre", helper: "Top scores by genre" },
-  { value: "author", label: "Author", helper: "Producers and creators" },
+const rankingOptions = [
+  {
+    value: "general",
+    label: "General",
+    helper: "All-time club energy",
+  },
+  {
+    value: "genre",
+    label: "Genre",
+    helper: "Top scores by genre",
+  },
+  {
+    value: "author",
+    label: "Artists",
+    helper: "Guessing artists",
+  },
+  {
+    value: "song_name",
+    label: "Song Name",
+    helper: "Recognize tracks fastest",
+  },
+  {
+    value: "time_period",
+    label: "Time Period",
+    helper: "Best decade experts",
+  },
 ]
 
 const buildPageWindow = (current: number, total: number, maxVisible = 7) => {

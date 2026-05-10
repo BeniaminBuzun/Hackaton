@@ -4,14 +4,30 @@ import { Button } from "@components/button"
 import axios from 'axios';
 import { getUserId } from "@/lib/authStore";
 import { useAuth } from "@/hooks/useAuth";
+import { useEffect, useState } from "react";
 export default function Home() {
   // Placeholder variables for scores
   const { isAuthenticated } = useAuth()
   const userId = getUserId()
-  const last10DaysScore = 12580 
-  const globalScore = 98420
+  const [accuracyPercent, setAccuracyPercent] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const accuracy = 53
+  useEffect(() => {
+    if (!isAuthenticated || !userId) return;
+
+    const fetchStats = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8081/api/stats/${userId}`);
+        setAccuracyPercent(response.data.accuracyPercent);
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, [isAuthenticated, userId]);
 
   const bottomStats = ["Daily Challenges", "Global Ranking", "10-Day Streak"]
   const navigate = useNavigate();
@@ -71,166 +87,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Button onClick={sendQuizRequest} size="lg" className="h-11 px-6 text-base">
-                {/* <Link 
-                  to="/quiz2" 
-                  state={{
-    "questionsForMusic": [
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "House",
-                        "Alternative",
-                        "Roots Reggae",
-                        "Música tropical"
-                    ],
-                    "id": 37,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/016.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "Pop",
-                        "IDM/Experimental",
-                        "Musicals",
-                        "Metal"
-                    ],
-                    "id": 36,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/001.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "Anime",
-                        "Reggae",
-                        "Country",
-                        "Metal"
-                    ],
-                    "id": 33,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/021.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "R&B/Soul",
-                        "Metal",
-                        "Alternative Folk",
-                        "Worldwide"
-                    ],
-                    "id": 39,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/025.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "Relaxation",
-                        "Techno",
-                        "Pop",
-                        "Reggae"
-                    ],
-                    "id": 34,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/026.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "Techno",
-                        "Vocal Pop",
-                        "Hard Rock",
-                        "Original Score"
-                    ],
-                    "id": 38,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/010.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "IDM/Experimental",
-                        "Pop Latino",
-                        "Hard Rock",
-                        "Korean Hip-Hop"
-                    ],
-                    "id": 31,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/011.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "Hard Rock",
-                        "Reggae",
-                        "Holiday",
-                        "Urbano latino"
-                    ],
-                    "id": 35,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/012.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "Afrobeats",
-                        "Hip-Hop/Rap",
-                        "Funk",
-                        "Folk"
-                    ],
-                    "id": 32,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/028.m4a"
-        },
-        {
-            "questions": [
-                {
-                    "answers": [
-                        "Alternative Rap",
-                        "Classical",
-                        "Hard Rock",
-                        "French Pop"
-                    ],
-                    "id": 40,
-                    "question": "What genre is this song?"
-                }
-            ],
-            "songUrl": "127.0.0.1:8081/015.m4a"
-        }
-    ],
-    "quizId": 3
-}}
-                > */}
                   Quick Game
-                {/* </Link> */}
                 
               </Button>
               <Button asChild variant="outline" size="lg" className="h-11 px-6 text-base">
@@ -254,30 +111,32 @@ export default function Home() {
                 </p>
               </div>
               <div className="mt-6 space-y-4 text-sm text-white/80">
-                <div className="flex items-center justify-between">
-                  <span>Last 10 days</span>
-                  <span className="font-mono font-semibold text-cyan-200">
-                    {last10DaysScore.toLocaleString()} pts
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>Global all-time</span>
-                  <span className="font-mono font-semibold text-fuchsia-200">
-                    {globalScore.toLocaleString()} pts
-                  </span>
-                </div>
+                {loading ? (
+                  <div className="text-center text-white/70">Loading stats...</div>
+                ) : accuracyPercent !== null ? (
+                  <div className="flex items-center justify-between">
+                    <span>Accuracy</span>
+                    <span className="font-mono font-semibold text-cyan-200">
+                      {Math.round(accuracyPercent)}%
+                    </span>
+                  </div>
+                ) : (
+                  <div className="text-center text-white/70">No stats available</div>
+                )}
               </div>
-              <div className="mt-6 space-y-2">
-                <div className="h-1.5 w-full rounded-full bg-white/10">
-                  <div 
-                    className="h-1.5 rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-emerald-300"
-                    style={{ width: `${accuracy}%` }}
-                  />
+              {accuracyPercent !== null && (
+                <div className="mt-6 space-y-2">
+                  <div className="h-1.5 w-full rounded-full bg-white/10">
+                    <div 
+                      className="h-1.5 rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-emerald-300"
+                      style={{ width: `${accuracyPercent}%` }}
+                    />
+                  </div>
+                  <p className="text-right text-xs text-white/40">
+                    accuracy {Math.round(accuracyPercent)}%
+                  </p>
                 </div>
-                <p className="text-right text-xs text-white/40">
-                  accuracy {Math.round(accuracy)}%
-                </p>
-              </div>
+              )}
             </div>
           </div>
         </div>

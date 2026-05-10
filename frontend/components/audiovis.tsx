@@ -211,14 +211,14 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
           padding: '10px 20px',
           fontSize: '16px',
           cursor: 'pointer',
-          borderRadius: '4px',
+          borderRadius: '50%',
           border: 'none',
-          background: '#3b82f6',
+          background: '#6b7280',
           color: 'white',
           transition: 'background 0.2s',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = '#2563eb')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = '#3b82f6')}
+        onMouseEnter={(e) => (e.currentTarget.style.background = '#4b5563')}
+        onMouseLeave={(e) => (e.currentTarget.style.background = '#6b7280')}
       >
         {isPlaying ? 'Pauza' : 'Odtwórz'}
       </button>

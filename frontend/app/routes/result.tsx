@@ -17,13 +17,12 @@ interface ApiResponse {
   summary: QuestionSummaryDTO[];
 }
 
-const DEFAULT_QUIZ_ID = "1";
 
 export default function ResultRoute() {
   const { isAuthenticated } = useRequireAuth();
   const location = useLocation();
   const data = location.state;
-  const effectiveQuizId = data?.quizId || DEFAULT_QUIZ_ID;
+  const effectiveQuizId = data.quizId;
   const userId = getUserId()
 
   const [quizResults, setQuizResults] = useState<QuestionSummaryDTO[] | null>(null);
@@ -77,7 +76,7 @@ export default function ResultRoute() {
       <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col items-center justify-center gap-4">
         <div className="text-center text-red-400">{error}</div>
         <Button asChild variant="outline" size="lg">
-          <Link to={`/quiz/${DEFAULT_QUIZ_ID}`}>Try again</Link>
+          <Link to={`/settings`}>Try again</Link>
         </Button>
       </div>
     );
@@ -89,7 +88,7 @@ export default function ResultRoute() {
       <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col items-center justify-center gap-4">
         <div className="text-center text-white/70">No results found for this quiz.</div>
         <Button asChild variant="outline" size="lg">
-          <Link to={`/quiz/${DEFAULT_QUIZ_ID}`}>Take a quiz</Link>
+          <Link to={`/settings`}>Take a quiz</Link>
         </Button>
       </div>
     );
@@ -126,7 +125,7 @@ export default function ResultRoute() {
 
           <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
             <Button asChild size="lg" className="h-11 px-6 text-base">
-              <Link to={`/quiz/${DEFAULT_QUIZ_ID}`}>Play again</Link>
+              <Link to={`/settings`}>Play again</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="h-11 px-6 text-base">
               <Link to="/">Back home</Link>
