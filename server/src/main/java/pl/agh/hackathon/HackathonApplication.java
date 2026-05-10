@@ -10,5 +10,4 @@ public class HackathonApplication {
 		SpringApplication.run(HackathonApplication.class, args);
 	}
 
-	//Cos
 }
