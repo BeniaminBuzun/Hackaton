@@ -1,10 +1,7 @@
 package pl.agh.hackathon.answer;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.agh.hackathon.Quiz.Quiz;
 import pl.agh.hackathon.User.User;
 import pl.agh.hackathon.question.Question;
@@ -13,29 +10,42 @@ import pl.agh.hackathon.question.Question;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="Answers")
+@Table(name = "answers")
 @Entity
 public class Answer {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="answerId", nullable=false)
-	private long id;
+	@Column(name = "answer_id", nullable = false)
+	private Long id;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="quizId")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(
+			name = "quiz_id",
+			nullable = false,
+			foreignKey = @ForeignKey(name = "fk_answer_quiz")
+	)
 	private Quiz quiz;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="questionId")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(
+			name = "question_id",
+			nullable = false,
+			foreignKey = @ForeignKey(name = "fk_answer_question")
+	)
 	private Question question;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="userId")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(
+			name = "user_id",
+			nullable = false,
+			foreignKey = @ForeignKey(name = "fk_answer_user")
+	)
 	private User user;
 
-	@Column(name="correctValue", nullable=false)
-	private int correct;
+	@Column(name = "correct_value", nullable = false)
+	private String correct;
 
-	@Column(name="answer", nullable=true)
-	private Integer answer;
+	@Column(name = "answer_value")
+	private String answer;
 }

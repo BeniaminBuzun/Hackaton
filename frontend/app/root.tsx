@@ -38,13 +38,13 @@ export function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
           <header className="relative mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
             <div className="flex items-center gap-3">
               <span className="inline-flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 via-fuchsia-500 to-emerald-400 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-black shadow-[0_0_30px_rgba(34,211,238,0.55)]">
-                NC
+                MQ
               </span>
               <div className="leading-tight">
                 <p className="text-xs font-semibold uppercase tracking-[0.4em] text-muted-foreground">
-                  Neon Club
+                  
                 </p>
-                <p className="text-lg font-semibold">Pulse Quiz</p>
+                <p className="text-lg font-semibold">Music Quizzer</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
