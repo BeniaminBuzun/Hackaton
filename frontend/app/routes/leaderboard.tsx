@@ -24,17 +24,12 @@ const buildPageWindow = (current: number, total: number, maxVisible = 7) => {
 }
 
 export default function LeaderboardRoute() {
-  const { isAuthenticated } = useRequireAuth()
-  if (!isAuthenticated) {
-    return null
-  }
-
   return <LeaderboardContent />
 }
 
 function LeaderboardContent() {
   const { status, data, error, type, page, pageSize, setType, setPage, refresh } =
-    useRanking({ pageSize: 12 })
+    useRanking({ pageSize: 10 })
 
   const totalPages = data?.totalPages ?? 1
   const pageWindow = useMemo(
@@ -133,29 +128,39 @@ function LeaderboardContent() {
           <div className="mt-4 space-y-3">
             {data.items.map((entry) => (
               <div
-                key={`${entry.position}-${entry.name}`}
+                key={`${entry.rank}-${entry.userId}`}
                 className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white/80"
               >
                 <div className="flex items-center gap-3">
                   <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs font-semibold text-white">
-                    {entry.position}
+                    {entry.rank}
                   </span>
+
                   <div className="flex flex-col">
                     <Link
-                      to={`/users/${entry.userId ?? entry.position}`}
+                      to={`/users/${entry.userId}`}
                       className="text-sm font-semibold text-white transition hover:text-cyan-200"
                     >
-                      {entry.name}
+                      {entry.username}
                     </Link>
-                    <span className="text-xs text-white/50">Club runner</span>
+
+                    <span className="text-xs text-white/50">
+                      {entry.correctAnswers}/{entry.totalAnswers} correct
+                    </span>
                   </div>
                 </div>
-                <span className="text-lg font-semibold text-white">
-                  {entry.score}
-                </span>
+
+                <div className="flex flex-col items-end gap-0.5">
+                  <span className="text-lg font-semibold text-white">
+                    {entry.accuracyPercent}%
+                  </span>
+
+                  <span className="text-xs text-white/50">
+                    accuracy
+                  </span>
+                </div>
               </div>
-            ))}
-          </div>
+            ))}          </div>
         ) : null}
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5">
