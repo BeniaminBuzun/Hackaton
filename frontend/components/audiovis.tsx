@@ -182,6 +182,7 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
       }}
     >
       <audio
+        key={audioUrl} 
         ref={audioRef}
         src={audioUrl}
         crossOrigin={crossOrigin}

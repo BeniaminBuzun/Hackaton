@@ -1,7 +1,8 @@
-import { Link } from "react-router"
+import { Link,useNavigate } from "react-router"
 
 import { Button } from "@components/button"
-
+import axios from 'axios';
+import { use } from "react";
 export default function Home() {
   // Placeholder variables for scores
 
@@ -11,6 +12,31 @@ export default function Home() {
   const accuracy = 53
 
   const bottomStats = ["Daily Challenges", "Global Ranking", "10-Day Streak"]
+  const navigate = useNavigate();
+  async function sendQuizRequest() {
+    const url = 'http://localhost:8081/api/quizes';
+    const body = {
+      options: {
+        "GENRE": true,
+        "ARTISTS": false,
+        "SONG_NAME": false,
+        "TIME_PERIOD": false,
+      },
+      "retake": false,
+      "userId": 1,
+    };
+
+    try {
+      const response = await axios.post(url, body, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log(  'Response:', response.data);
+      navigate('/quiz2', { state: response.data });
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <div className="flex min-h-[70vh] flex-col gap-14 pt-6">
@@ -35,19 +61,167 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-              <Button asChild size="lg" className="h-11 px-6 text-base">
-                <Link 
+              <Button onClick={sendQuizRequest} size="lg" className="h-11 px-6 text-base">
+                {/* <Link 
                   to="/quiz2" 
-                  state={{ id:10,questions:[{
-                    music_url:"/skolim.mp3",
-                    questions:[{question:"asdff",answers:["qqq","fff","aaa","zzz"]}]
-                  },{
-                    music_url:"asdf",
-                    questions:[{question:"qwertty",answers:["qqq","fff","aaa","zzz"]}]
-                  }] }}
-                >
+                  state={{
+    "questionsForMusic": [
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "House",
+                        "Alternative",
+                        "Roots Reggae",
+                        "Música tropical"
+                    ],
+                    "id": 37,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/016.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "Pop",
+                        "IDM/Experimental",
+                        "Musicals",
+                        "Metal"
+                    ],
+                    "id": 36,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/001.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "Anime",
+                        "Reggae",
+                        "Country",
+                        "Metal"
+                    ],
+                    "id": 33,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/021.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "R&B/Soul",
+                        "Metal",
+                        "Alternative Folk",
+                        "Worldwide"
+                    ],
+                    "id": 39,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/025.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "Relaxation",
+                        "Techno",
+                        "Pop",
+                        "Reggae"
+                    ],
+                    "id": 34,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/026.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "Techno",
+                        "Vocal Pop",
+                        "Hard Rock",
+                        "Original Score"
+                    ],
+                    "id": 38,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/010.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "IDM/Experimental",
+                        "Pop Latino",
+                        "Hard Rock",
+                        "Korean Hip-Hop"
+                    ],
+                    "id": 31,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/011.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "Hard Rock",
+                        "Reggae",
+                        "Holiday",
+                        "Urbano latino"
+                    ],
+                    "id": 35,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/012.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "Afrobeats",
+                        "Hip-Hop/Rap",
+                        "Funk",
+                        "Folk"
+                    ],
+                    "id": 32,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/028.m4a"
+        },
+        {
+            "questions": [
+                {
+                    "answers": [
+                        "Alternative Rap",
+                        "Classical",
+                        "Hard Rock",
+                        "French Pop"
+                    ],
+                    "id": 40,
+                    "question": "What genre is this song?"
+                }
+            ],
+            "songUrl": "127.0.0.1:8081/015.m4a"
+        }
+    ],
+    "quizId": 3
+}}
+                > */}
                   Quick Game
-                </Link>
+                {/* </Link> */}
                 
               </Button>
               <Button asChild variant="outline" size="lg" className="h-11 px-6 text-base">
