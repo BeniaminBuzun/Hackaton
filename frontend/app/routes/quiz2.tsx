@@ -3,16 +3,26 @@ import MusicPlayer from "@components/musicPlayer";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useRequireAuth } from "../hooks/useRequireAuth";
+import axios from 'axios';
+import { getUserId } from "@/lib/authStore";
 
 export default function QuizRoute2() {
   const { isAuthenticated } = useRequireAuth();
   const location = useLocation();
   const data = location.state;
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [isAnswered, setIsAnswered] = useState(false);
   const navigate = useNavigate();
+  const userId = getUserId()
+
+  // NEW: track which answer button should turn green
+  const [correctIndex, setCorrectIndex] = useState<number | null>(null);
+  const [wrongIndex, setWrongIndex] = useState<number | null>(null);
+
+  // Reset green highlight when moving to next question
+  useEffect(() => {
+    setCorrectIndex(null);
+    setWrongIndex(null);
+  }, [currentIndex]);
 
   if (!isAuthenticated) {
     return null;
@@ -36,51 +46,52 @@ export default function QuizRoute2() {
 
   const currentItem = data.questionsForMusic[currentIndex];
   const isLastItem = currentIndex >= data.questionsForMusic.length - 1;
-  const correctAnswer = currentItem.questions[0].correctAnswer; // adjust path if needed
+  async function sendQuizRequest(response: string, index: number,id:Number) {
+    const url = 'http://localhost:8081/api/quizes/answers';
+    const body = {
+    "answerId": id,
+    "answer":response,
+    "userId":userId
+};
 
-  // Reset answer state when moving to next question
-  useEffect(() => {
-    setSelectedAnswer(null);
-    setIsAnswered(false);
-  }, [currentIndex]);
+    try {
+      const response = await axios.post(url, body, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log(  'Response:', response.data);
+      console.log("sending POST to server");
+      console.log(response.data);
+      console.log(index)
+      if (index ==1) {
+        setCorrectIndex(index);
 
-  const answerQuestion = (response: string) => {
-    if (isAnswered) return; // prevent multiple answers
+    }
+    else {
+      setWrongIndex(index);
 
-    setSelectedAnswer(response);
-    setIsAnswered(true);
+    }
 
     if (!isLastItem) {
+
       setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
-      }, 800); // longer delay so user sees color feedback
+      }, 30);
     } else {
       setTimeout(() => {
-        navigate("/result");
-      }, 800);
+        console.log("Quiz finished, navigating to results",data.quizId);
+        navigate("/result",{state:{quizId: data.quizId}});
+      }, 30);
     }
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+const answerQuestion = (response: string, index: number,id:Number) => {
+  sendQuizRequest(response, index,id) 
   };
 
-  // Function to determine button styling based on answer state
-  const getButtonClass = (answer: string) => {
-    const baseClass =
-      "group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98] w-full";
-
-    if (!isAnswered) return baseClass;
-
-    // Show correct answer in green
-    if (answer === correctAnswer) {
-      return `${baseClass} bg-green-600/80 border-green-400 hover:bg-green-600/90`;
-    }
-
-    // Show user's wrong answer in red
-    if (answer === selectedAnswer && answer !== correctAnswer) {
-      return `${baseClass} bg-red-600/80 border-red-400 hover:bg-red-600/90`;
-    }
-
-    // Other non-selected, non-correct answers become dimmed
-    return `${baseClass} opacity-50 cursor-not-allowed`;
-  };
 
   return (
     <div className="min-h-screen">
@@ -106,7 +117,8 @@ export default function QuizRoute2() {
         {/* Player Card */}
         <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-6 shadow-[0_0_60px_rgba(34,211,238,0.15)] backdrop-blur-sm">
           <AudioVisualizer audioUrl={"http://" + currentItem.songUrl} />
-          {/* <AudioVisualizer audioUrl="/skolim.mp3" /> */}
+
+          <AudioVisualizer audioUrl="/skolim.mp3" />
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-black/40 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -120,19 +132,27 @@ export default function QuizRoute2() {
 
         {/* Answers Grid */}
         <div className="grid gap-5 md:grid-cols-2">
-          {currentItem.questions[0].answers.map((answer: string, index: number) => (
+          {currentItem.questions[0].answers.map((answer: string, index: number,) => (
             <button
               key={index}
-              onClick={() => answerQuestion(answer)}
-              disabled={isAnswered}
-              className={getButtonClass(answer)}
+              onClick={() => answerQuestion(answer, index,data.questionsForMusic[currentIndex].questions[0].id)}
+              className={`group relative overflow-hidden rounded-2xl border px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98] 
+                ${correctIndex === index
+                  ? 'bg-green-500/20 border-green-400' 
+                  : ''
+
+              } ${wrongIndex === index
+                  ? 'bg-red-500/20 border-red-400' 
+                  :'' }`}
             >
+              {/* Subtle glow on hover (unchanged) */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-fuchsia-500/0 opacity-0 transition-opacity duration-300 group-hover:from-cyan-500/10 group-hover:to-fuchsia-500/10 group-hover:opacity-100" />
               <span className="relative z-10 font-sans text-lg font-medium">
                 {answer}
               </span>
             </button>
           ))}
+
         </div>
       </div>
     </div>

@@ -61,15 +61,15 @@ Format odpowiedzi:
 3. Metoda GET do odczytania nazwy danego użytkownika
 
 ```bash
-POST /user/{userId}
+GET /user/{userId}
 ```
 
 Format zapytania: puste
 
 Format odpowiedzi:
-{
-    "nick" : "username"
-}
+"username"
+
+
 
 ### Endpointy do tworzenia rozgrywki:
 
@@ -106,13 +106,14 @@ POST /api/quizes/answers
 ```
 
 Bierzemy do Body:
-- answer id
+- quiz id
 - user id
+- question id
 - treść odpowiedzi udzielonej przez użytkownika
 
 Zwracamy w Response:
 - informacje czy udzielona odpowiedź jest poprawna (boolean)
-
+- poprawną odpowiedź
 ---
 
 3. Metoda GET z wynikami

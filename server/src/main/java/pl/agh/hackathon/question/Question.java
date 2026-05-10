@@ -1,6 +1,7 @@
 package pl.agh.hackathon.question;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import pl.agh.hackathon.QuestionType.QuestionType;
 import pl.agh.hackathon.Quiz.Quiz;
@@ -24,6 +25,7 @@ public class Question {
 	@Column(name = "question_id")
 	private Long id;
 
+	@NotBlank(message = "Question text cannot be blank")
 	@Column(nullable = false)
 	private String question;
 
@@ -38,9 +40,11 @@ public class Question {
 	)
 	private Song song;
 
+	@NotBlank(message = "Correct answer (answer1) cannot be blank")
 	@Column(name = "correct_answer", nullable = false)
 	private String answer1;
 
+	@NotBlank(message = "Incorrect answer (answer2) cannot be blank")
 	@Column(name = "incorrect_answer", nullable = false)
 	private String answer2;
 

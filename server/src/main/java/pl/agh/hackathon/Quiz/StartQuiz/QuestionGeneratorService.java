@@ -141,9 +141,14 @@ public class QuestionGeneratorService {
     }
 
     private void fillRest(List<String> incorrectAnswers, Question question) {
-        if (!incorrectAnswers.isEmpty()) {
-            question.setAnswer2(incorrectAnswers.getFirst());
+        // answer2 jest MANDATORY - zawsze musi być ustawiony (nullable = false)
+        if (incorrectAnswers.size() >= 1) {
+            question.setAnswer2(incorrectAnswers.get(0));
+        } else {
+            // Fallback jeśli brakuje błędnych odpowiedzi w bazie
+            question.setAnswer2("Unknown");
         }
+        
         if (incorrectAnswers.size() >= 2) {
             question.setAnswer3(incorrectAnswers.get(1));
         }

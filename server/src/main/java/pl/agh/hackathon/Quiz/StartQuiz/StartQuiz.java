@@ -111,6 +111,31 @@ public class StartQuiz {
     }
 
     private void generateAnswer(Question question, Quiz quiz, User user, String correctAnswer) {
+        // 🔥 DEBUGGING
+        System.out.println("\n=== GENERATING ANSWER ===");
+        System.out.println("Question ID: " + question.getId());
+        System.out.println("Question Text: " + question.getQuestion());
+        System.out.println("Question.answer1: " + question.getAnswer1());
+        System.out.println("Question.answer2: " + question.getAnswer2());
+        System.out.println("Question.answer3: " + question.getAnswer3());
+        System.out.println("Question.answer4: " + question.getAnswer4());
+        System.out.println("Correct Answer Being Set: " + correctAnswer);
+        System.out.println("Are they equal? " + (question.getAnswer1() != null && question.getAnswer1().equals(correctAnswer)));
+        System.out.println("========================\n");
+        
+        // Validacja
+        if (correctAnswer == null || correctAnswer.isBlank()) {
+            throw new IllegalArgumentException("Cannot create Answer with null/blank correctAnswer for question: " + question.getId());
+        }
+        
+        if (question.getAnswer1() == null) {
+            throw new IllegalArgumentException("Question " + question.getId() + " has null answer1!");
+        }
+        
+        if (question.getAnswer2() == null) {
+            throw new IllegalArgumentException("Question " + question.getId() + " has null answer2!");
+        }
+        
         Answer answer = new Answer();
         answer.setQuestion(question);
         answer.setQuiz(quiz);
