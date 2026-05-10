@@ -41,25 +41,28 @@ public class UserStatsController {
     @GetMapping("/leaderboard")
     @Operation(
             summary = "Ranking graczy",
-            description = "Zwraca paginowaną listę graczy posortowanych po skuteczności",
+            description = "Zwraca paginowaną listę graczy posortowanych po skuteczności. Kategoria: OVERALL, GENRE, ARTISTS, SONG_NAME, TIME_PERIOD",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Lista graczy",
                             content = @Content(schema = @Schema(implementation = LeaderboardResponse.class))),
-                    @ApiResponse(responseCode = "400", description = "Nieprawidłowy limit (dozwolone: 10 lub 20)",
+                    @ApiResponse(responseCode = "400", description = "Nieprawidłowy limit lub kategoria",
                             content = @Content)
             }
     )
     public ResponseEntity<LeaderboardResponse> getLeaderboard(
             @Parameter(description = "Numer strony (od 1)", example = "1")
-            @RequestParam(defaultValue = "1")  int page,
+            @RequestParam(defaultValue = "1") int page,
             @Parameter(description = "Liczba wyników na stronie (10 lub 20)", example = "10")
-            @RequestParam(defaultValue = "10") int limit
+            @RequestParam(defaultValue = "10") int limit,
+            @Parameter(description = "Kategoria rankingu", example = "OVERALL")
+            @RequestParam(defaultValue = "OVERALL") LeaderboardCategory category
     ) {
         if (limit != 10 && limit != 20) {
             return ResponseEntity.badRequest().build();
         }
-
         Pageable pageable = PageRequest.of(page - 1, limit);
-        return ResponseEntity.ok(userStatsService.getLeaderboard(pageable, page, limit));
+        return ResponseEntity.ok(userStatsService.getLeaderboard(pageable, page, limit, category));
     }
+
+
 }

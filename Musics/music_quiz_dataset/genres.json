@@ -1,0 +1,270 @@
+[
+  {
+    "id": 1,
+    "name": "Afrobeats"
+  },
+  {
+    "id": 2,
+    "name": "Alternative"
+  },
+  {
+    "id": 3,
+    "name": "Alternative Folk"
+  },
+  {
+    "id": 4,
+    "name": "Alternative Rap"
+  },
+  {
+    "id": 5,
+    "name": "Ambient"
+  },
+  {
+    "id": 6,
+    "name": "Anime"
+  },
+  {
+    "id": 7,
+    "name": "Baile Funk"
+  },
+  {
+    "id": 8,
+    "name": "Bass"
+  },
+  {
+    "id": 9,
+    "name": "Brazilian"
+  },
+  {
+    "id": 10,
+    "name": "British Invasion"
+  },
+  {
+    "id": 11,
+    "name": "Children's Music"
+  },
+  {
+    "id": 12,
+    "name": "Christian"
+  },
+  {
+    "id": 13,
+    "name": "Christmas"
+  },
+  {
+    "id": 14,
+    "name": "Christmas: Classic"
+  },
+  {
+    "id": 15,
+    "name": "Christmas: Classical"
+  },
+  {
+    "id": 16,
+    "name": "Classical"
+  },
+  {
+    "id": 17,
+    "name": "Classical Crossover"
+  },
+  {
+    "id": 18,
+    "name": "Country"
+  },
+  {
+    "id": 19,
+    "name": "Dance"
+  },
+  {
+    "id": 20,
+    "name": "Downtempo"
+  },
+  {
+    "id": 21,
+    "name": "Easy Listening"
+  },
+  {
+    "id": 22,
+    "name": "Electronic"
+  },
+  {
+    "id": 23,
+    "name": "Electronica"
+  },
+  {
+    "id": 24,
+    "name": "Folk"
+  },
+  {
+    "id": 25,
+    "name": "Folk-Rock"
+  },
+  {
+    "id": 26,
+    "name": "French Pop"
+  },
+  {
+    "id": 27,
+    "name": "Funk"
+  },
+  {
+    "id": 28,
+    "name": "Hard Rock"
+  },
+  {
+    "id": 29,
+    "name": "Hip-Hop"
+  },
+  {
+    "id": 30,
+    "name": "Hip-Hop/Rap"
+  },
+  {
+    "id": 31,
+    "name": "Holiday"
+  },
+  {
+    "id": 32,
+    "name": "House"
+  },
+  {
+    "id": 33,
+    "name": "IDM/Experimental"
+  },
+  {
+    "id": 34,
+    "name": "Indie Rock"
+  },
+  {
+    "id": 35,
+    "name": "Instrumental"
+  },
+  {
+    "id": 36,
+    "name": "J-Pop"
+  },
+  {
+    "id": 37,
+    "name": "Jazz"
+  },
+  {
+    "id": 38,
+    "name": "K-Pop"
+  },
+  {
+    "id": 39,
+    "name": "Korean Folk-Pop"
+  },
+  {
+    "id": 40,
+    "name": "Korean Hip-Hop"
+  },
+  {
+    "id": 41,
+    "name": "Latin"
+  },
+  {
+    "id": 42,
+    "name": "Meditation"
+  },
+  {
+    "id": 43,
+    "name": "Metal"
+  },
+  {
+    "id": 44,
+    "name": "Modern Dancehall"
+  },
+  {
+    "id": 45,
+    "name": "Musicals"
+  },
+  {
+    "id": 46,
+    "name": "Música Mexicana"
+  },
+  {
+    "id": 47,
+    "name": "Música tropical"
+  },
+  {
+    "id": 48,
+    "name": "New Age"
+  },
+  {
+    "id": 49,
+    "name": "New Wave"
+  },
+  {
+    "id": 50,
+    "name": "Original Score"
+  },
+  {
+    "id": 51,
+    "name": "Pop"
+  },
+  {
+    "id": 52,
+    "name": "Pop Latino"
+  },
+  {
+    "id": 53,
+    "name": "R&B/Soul"
+  },
+  {
+    "id": 54,
+    "name": "Rap"
+  },
+  {
+    "id": 55,
+    "name": "Reggae"
+  },
+  {
+    "id": 56,
+    "name": "Relaxation"
+  },
+  {
+    "id": 57,
+    "name": "Rock"
+  },
+  {
+    "id": 58,
+    "name": "Roots Reggae"
+  },
+  {
+    "id": 59,
+    "name": "Singer/Songwriter"
+  },
+  {
+    "id": 60,
+    "name": "Soundtrack"
+  },
+  {
+    "id": 61,
+    "name": "Spoken Word"
+  },
+  {
+    "id": 62,
+    "name": "Techno"
+  },
+  {
+    "id": 63,
+    "name": "Traditional Country"
+  },
+  {
+    "id": 64,
+    "name": "Trance"
+  },
+  {
+    "id": 65,
+    "name": "Urbano latino"
+  },
+  {
+    "id": 66,
+    "name": "Vocal Pop"
+  },
+  {
+    "id": 67,
+    "name": "Worldwide"
+  }
+]

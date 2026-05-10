@@ -1,6 +1,7 @@
 import { Link } from "react-router"
 
 import { Button } from "@components/button"
+import AudioVisualizer from "@components/audiovis"
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
               <h1 className="text-3xl font-semibold leading-tight text-white md:text-5xl">
                 Enter the neon club and sync with the beat.
               </h1>
+              <AudioVisualizer audioUrl="skolim.mp3"></AudioVisualizer>
               <p className="max-w-xl text-base text-white/70 md:text-lg">
                 Pulse Quiz is your late-night soundcheck. Identify the track, lock
                 the vibe, and race the laser-lit leaderboard.
@@ -29,7 +31,19 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Button asChild size="lg" className="h-11 px-6 text-base">
-                <Link to="/quiz/neon-club">Enter the dancefloor</Link>
+                <Link 
+                  to="/quiz2" 
+                  state={{ id:10,questions:[{
+                    music_url:"/skolim.mp3",
+                    questions:[{question:"asdff",answers:["qqq","fff","aaa","zzz"]}]
+                  },{
+                    music_url:"asdf",
+                    questions:[{question:"qwertty",answers:["qqq","fff","aaa","zzz"]}]
+                  }] }}
+                ></Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="h-11 px-6 text-base">
+                <Link to="/leaderboard">View leaderboard</Link>
               </Button>
               <span className="text-sm text-white/50">
                 Doors open soon.

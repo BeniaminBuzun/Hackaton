@@ -3,6 +3,7 @@ package pl.agh.hackathon.User;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.agh.hackathon.Quiz.Quiz;
+import pl.agh.hackathon.answer.Answer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +14,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User
-{
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="userId")
     private long id;
 
     @Column(nullable = false)
@@ -25,6 +27,9 @@ public class User
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "userSet",fetch=FetchType.LAZY)
     private Set<Quiz> quizSet = new HashSet<>();
+
+	@OneToMany(fetch=FetchType.LAZY)
+	private Set<Answer> answers;
 }
