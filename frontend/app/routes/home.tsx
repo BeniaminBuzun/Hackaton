@@ -3,9 +3,10 @@ import { Link,useNavigate } from "react-router"
 import { Button } from "@components/button"
 import axios from 'axios';
 import { use } from "react";
+import { getUserId } from "@/lib/authStore";
 export default function Home() {
   // Placeholder variables for scores
-
+  const userId = getUserId()
   const last10DaysScore = 12580 
   const globalScore = 98420
 
@@ -23,7 +24,7 @@ export default function Home() {
         "TIME_PERIOD": false,
       },
       "retake": false,
-      "userId": 1,
+      "userId": userId,
     };
 
     try {
