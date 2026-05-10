@@ -6,14 +6,7 @@ import jakarta.validation.constraints.Positive;
 public class SendAnswerDTO {
     @NotBlank
     @Positive
-    public long questionId;
+    public long answerId;
     @NotBlank
-    @Positive
-    public int answerId;
-    @NotBlank
-    @Positive
-    public int answer;
-    @NotBlank
-    @Positive
-    public long userId;
+    public String answer;
 }
