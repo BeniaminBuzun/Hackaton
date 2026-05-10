@@ -14,9 +14,7 @@ Ta aplikacja ma za zadanie jednocześnie umożliwić użytkownikom na rywalizacj
 
 Użytkownik może utworzyć quiz według swoich preferencji, a następnie, słuchając utworów, odgadywać gatunek, autora (zespół muzyczny), a nawet przedział czasowy w którym dany utwór powstał.
 
-
 ## Scenariusz użycia
----
 
 Po wejściu na ekran główny użytkownik może się zarejestrować lub zalogować podając nazwę użytkownika oraz hasło.
 Po udanym logowaniu, użytkownik może zobaczyć swój profil, statystyki oraz rankingi lub rozpocząć quiz.
