@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { Button } from "@components/button";
+import { useRequireAuth } from "../hooks/useRequireAuth";
 import { useNavigate } from "react-router"
 
 type SettingsForm = {
@@ -16,6 +17,7 @@ type SettingsForm = {
 };
 
 export default function SettingsPage() {
+  const { isAuthenticated } = useRequireAuth();
   const navigate = useNavigate();
 
   const [numQuestions, setNumQuestions] = useState(5);
@@ -46,7 +48,11 @@ export default function SettingsPage() {
       navigate("/quiz2", { state: { settings: formData } });
     }
 
-  };
+  )};
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen">
