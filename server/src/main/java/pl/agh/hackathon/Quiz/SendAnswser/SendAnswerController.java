@@ -37,6 +37,7 @@ public class SendAnswerController {
 
         SendAnswerResponseDTO response = new SendAnswerResponseDTO();
         response.answerIsCorrect = isCorrect;
+        response.answerCorrect = answerEntity.getCorrect();
 
         return response;
     }
