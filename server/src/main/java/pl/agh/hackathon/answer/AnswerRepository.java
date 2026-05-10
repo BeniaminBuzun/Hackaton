@@ -16,7 +16,7 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
     Optional<Answer> findById(long answerId);
 
     @Modifying
-    @Query("update Answer a set a.correct = :answer where a.id = :id ")
+    @Query("update Answer a set a.answer = :answer where a.id = :id ")
     void updateAnswer(Long id, String answer);
 	List<Answer> findByQuizAndUser(Quiz quiz, User user);
 }

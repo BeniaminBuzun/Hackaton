@@ -9,4 +9,8 @@ public class SendAnswerDTO {
     public long answerId;
     @NotBlank
     public String answer;
+
+    @NotBlank
+    @Positive
+    public long userId;
 }

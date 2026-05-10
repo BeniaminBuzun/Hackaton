@@ -15,6 +15,7 @@ import pl.agh.hackathon.question.Question;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -53,16 +54,16 @@ public class EndQuizController {
 		int score=0;
 
 		for(Answer answer : answers) {
-			if(answer.getAnswer()==answer.getCorrect())
+			QuestionSummaryDTO summary = new QuestionSummaryDTO();
+			if(Objects.equals(answer.getAnswer(), answer.getCorrect())) {
 				score++;
-
+				summary.points=1;
+			}
 			Question question = answer.getQuestion();
 			Song song=question.getSong();
 
-			QuestionSummaryDTO summary = new QuestionSummaryDTO();
 			summary.answer=answer.getAnswer();
 			summary.correctAnswer=answer.getCorrect();
-			summary.points=1;
 			summary.question=question.getQuestion();
 			summary.title=song.getTitle();
 			summaries.add(summary);
