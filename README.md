@@ -19,11 +19,10 @@ Użytkownik może utworzyć quiz według swoich preferencji, a następnie, słuc
 Po wejściu na ekran główny użytkownik może się zarejestrować lub zalogować podając nazwę użytkownika oraz hasło.
 Po udanym logowaniu, użytkownik może zobaczyć swój profil, statystyki oraz rankingi lub rozpocząć quiz.
 
-Zalogowany użytkownik może przed rozpoczęciem quizu dostosować jego zakres i typ pytań.
-Podczas trwania quizu, użytkownik wybiera jedną z dostępnych odpowiedzi a następnie otrzymuje informację o poprawnej odpowiedzi.
-Przechodzi do następnego pytania przez naciśnięcie odpowiedniego przycisku.
+Niezalagowany użytkownik może wybrać opcję "quick game", natomiast po zalogowaniu może przed rozpoczęciem quizu dostosować jego zakres i typ pytań.
+Podczas trwania quizu, użytkownik wybiera jedną z dostępnych odpowiedzi, a następnie przechodzi do następnego pytania przez naciśnięcie odpowiedniego przycisku.
 
-Po zakończeniu quizu, użytkownik może zobaczyć podsumowanie quizu.
+Po zakończeniu quizu, użytkownik może zobaczyć podsumowanie quizu: zobaczyć ile punktów zdobył oraz poprawne odpowiedzi do pytań.
 Pomoże to chętnym użytkownikom zorientować się w świecie muzycznym lub zapoznać się z nowymi gatunkami, utworami czy zespołami.
 
 
