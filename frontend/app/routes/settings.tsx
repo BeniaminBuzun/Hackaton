@@ -48,7 +48,7 @@ export default function SettingsPage() {
       navigate("/quiz2", { state: formData });
     }, 1000);
 
-  )};
+  };
 
   if (!isAuthenticated) {
     return null;

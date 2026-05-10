@@ -1,8 +1,7 @@
 import AudioVisualizer from "@components/audiovis";
 import MusicPlayer from "@components/musicPlayer";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
-
 import { useRequireAuth } from "../hooks/useRequireAuth";
 
 export default function QuizRoute2() {
@@ -11,13 +10,16 @@ export default function QuizRoute2() {
   const data = location.state;
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [isAnswered, setIsAnswered] = useState(false);
   const navigate = useNavigate();
 
   if (!isAuthenticated) {
     return null;
   }
 
-  if (!data || !data.questions || data.questions.length === 0) {
+  console.log(data.questionsForMusic.length);
+  if (!data || !data.questionsForMusic || data.questionsForMusic.length === 0) {
     return (
       <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col items-center justify-center gap-10 pt-6">
         <section className="rounded-[2.5rem] border border-white/10 bg-white/5 px-8 py-12 text-center shadow-[0_0_60px_rgba(34,211,238,0.15)]">
@@ -32,17 +34,52 @@ export default function QuizRoute2() {
     );
   }
 
-  const currentItem = data.questions[currentIndex];
-  const isLastItem = currentIndex >= data.questions.length - 1;
+  const currentItem = data.questionsForMusic[currentIndex];
+  const isLastItem = currentIndex >= data.questionsForMusic.length - 1;
+  const correctAnswer = currentItem.questions[0].correctAnswer; // adjust path if needed
+
+  // Reset answer state when moving to next question
+  useEffect(() => {
+    setSelectedAnswer(null);
+    setIsAnswered(false);
+  }, [currentIndex]);
 
   const answerQuestion = (response: string) => {
-    console.log("sending POST to server");
-    console.log(response);
+    if (isAnswered) return; // prevent multiple answers
+
+    setSelectedAnswer(response);
+    setIsAnswered(true);
+
     if (!isLastItem) {
-      setCurrentIndex((prev) => prev + 1);
+      setTimeout(() => {
+        setCurrentIndex((prev) => prev + 1);
+      }, 800); // longer delay so user sees color feedback
     } else {
-      navigate("/result");
+      setTimeout(() => {
+        navigate("/result");
+      }, 800);
     }
+  };
+
+  // Function to determine button styling based on answer state
+  const getButtonClass = (answer: string) => {
+    const baseClass =
+      "group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98] w-full";
+
+    if (!isAnswered) return baseClass;
+
+    // Show correct answer in green
+    if (answer === correctAnswer) {
+      return `${baseClass} bg-green-600/80 border-green-400 hover:bg-green-600/90`;
+    }
+
+    // Show user's wrong answer in red
+    if (answer === selectedAnswer && answer !== correctAnswer) {
+      return `${baseClass} bg-red-600/80 border-red-400 hover:bg-red-600/90`;
+    }
+
+    // Other non-selected, non-correct answers become dimmed
+    return `${baseClass} opacity-50 cursor-not-allowed`;
   };
 
   return (
@@ -61,14 +98,15 @@ export default function QuizRoute2() {
               Music Quiz
             </h1>
             <p className="mt-3 text-sm font-semibold uppercase tracking-[0.3em] text-white/50">
-              Track {currentIndex + 1} of {data.questions.length}
+              {/* Track {currentIndex + 1} of {data.questionsForMusic.length} */}
             </p>
           </div>
         </div>
 
         {/* Player Card */}
         <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-6 shadow-[0_0_60px_rgba(34,211,238,0.15)] backdrop-blur-sm">
-          <AudioVisualizer audioUrl={currentItem.music_url} />
+          <AudioVisualizer audioUrl={"http://" + currentItem.songUrl} />
+          {/* <AudioVisualizer audioUrl="/skolim.mp3" /> */}
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-black/40 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -86,9 +124,9 @@ export default function QuizRoute2() {
             <button
               key={index}
               onClick={() => answerQuestion(answer)}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-left text-white transition-all duration-200 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] active:scale-[0.98]"
+              disabled={isAnswered}
+              className={getButtonClass(answer)}
             >
-              {/* Subtle glow on hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-fuchsia-500/0 opacity-0 transition-opacity duration-300 group-hover:from-cyan-500/10 group-hover:to-fuchsia-500/10 group-hover:opacity-100" />
               <span className="relative z-10 font-sans text-lg font-medium">
                 {answer}

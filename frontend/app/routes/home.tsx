@@ -1,7 +1,8 @@
-import { Link } from "react-router"
+import { Link,useNavigate } from "react-router"
 
 import { Button } from "@components/button"
-
+import axios from 'axios';
+import { use } from "react";
 export default function Home() {
   // Placeholder variables for scores
 
@@ -11,6 +12,31 @@ export default function Home() {
   const accuracy = 53
 
   const bottomStats = ["Daily Challenges", "Global Ranking", "10-Day Streak"]
+  const navigate = useNavigate();
+  async function sendQuizRequest() {
+    const url = 'http://localhost:8081/api/quizes';
+    const body = {
+      options: {
+        "GENRE": true,
+        "ARTISTS": false,
+        "SONG_NAME": false,
+        "TIME_PERIOD": false,
+      },
+      "retake": false,
+      "userId": 1,
+    };
+
+    try {
+      const response = await axios.post(url, body, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log(  'Response:', response.data);
+      navigate('/quiz2', { state: response.data });
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <div className="flex min-h-[70vh] flex-col gap-14 pt-6">
@@ -35,8 +61,8 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-              <Button asChild size="lg" className="h-11 px-6 text-base">
-                <Link 
+              <Button onClick={sendQuizRequest} size="lg" className="h-11 px-6 text-base">
+                {/* <Link 
                   to="/quiz2" 
                   state={{
     "questionsForMusic": [
@@ -193,9 +219,9 @@ export default function Home() {
     ],
     "quizId": 3
 }}
-                >
+                > */}
                   Quick Game
-                </Link>
+                {/* </Link> */}
                 
               </Button>
               <Button asChild variant="outline" size="lg" className="h-11 px-6 text-base">
