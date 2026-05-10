@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router"
 import { Button } from "@components/button"
 import { getLatestResult } from "../lib/quizSessionStore"
+import { useRequireAuth } from "../hooks/useRequireAuth"
 
 const DEFAULT_QUIZ_ID = "neon-club"
 
@@ -60,9 +61,14 @@ const PLACEHOLDER_RESULT: QuizResultData = {
 }
 
 export default function ResultRoute() {
+  const { isAuthenticated } = useRequireAuth()
   const location = useLocation()
   const locationState = location.state as LocationState | null
   const realResult = locationState?.result ?? getLatestResult() as QuizResultData | null
+
+  if (!isAuthenticated) {
+    return null
+  }
   
   // Use placeholder if no real result exists
   const result = realResult ?? PLACEHOLDER_RESULT

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { Button } from "@components/button";
+import { useRequireAuth } from "../hooks/useRequireAuth";
 
 type SettingsForm = {
   numQuestions: number;
@@ -15,6 +16,7 @@ type SettingsForm = {
 };
 
 export default function SettingsPage() {
+  const { isAuthenticated } = useRequireAuth();
   const [numQuestions, setNumQuestions] = useState(5);
   const [genre, setGenre] = useState("none"); // "none" means no genre selected
   const [questionTypes, setQuestionTypes] = useState({
@@ -40,6 +42,10 @@ export default function SettingsPage() {
     };
     console.log("Settings values:", formData);
   };
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen">

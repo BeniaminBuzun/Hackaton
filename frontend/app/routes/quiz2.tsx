@@ -3,12 +3,19 @@ import MusicPlayer from "@components/musicPlayer";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
+import { useRequireAuth } from "../hooks/useRequireAuth";
+
 export default function QuizRoute2() {
+  const { isAuthenticated } = useRequireAuth();
   const location = useLocation();
   const data = location.state;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   if (!data || !data.questions || data.questions.length === 0) {
     return (

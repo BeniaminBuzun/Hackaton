@@ -3,6 +3,7 @@ import { Link } from "react-router"
 
 import { Button } from "@components/button"
 
+import { useRequireAuth } from "../hooks/useRequireAuth"
 import { useRanking } from "../hooks/useRanking"
 import type { RankingType } from "../lib/rankingClient"
 
@@ -23,6 +24,15 @@ const buildPageWindow = (current: number, total: number, maxVisible = 7) => {
 }
 
 export default function LeaderboardRoute() {
+  const { isAuthenticated } = useRequireAuth()
+  if (!isAuthenticated) {
+    return null
+  }
+
+  return <LeaderboardContent />
+}
+
+function LeaderboardContent() {
   const { status, data, error, type, page, pageSize, setType, setPage, refresh } =
     useRanking({ pageSize: 12 })
 

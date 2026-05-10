@@ -3,12 +3,22 @@ import { useNavigate, useParams } from "react-router"
 
 import { Button } from "@components/button"
 
+import { useRequireAuth } from "../hooks/useRequireAuth"
 import { useQuizFlow } from "../hooks/useQuizFlow"
 import { setLatestResult } from "../lib/quizSessionStore"
 
 const DEFAULT_QUIZ_ID = "neon-club"
 
 export default function QuizRoute() {
+  const { isAuthenticated } = useRequireAuth()
+  if (!isAuthenticated) {
+    return null
+  }
+
+  return <QuizContent />
+}
+
+function QuizContent() {
   const params = useParams()
   const quizId = params.quizId ?? DEFAULT_QUIZ_ID
   const navigate = useNavigate()
