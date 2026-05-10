@@ -1,81 +1,107 @@
-import { Link, useLocation } from "react-router"
-import { Button } from "@components/button"
-import { getLatestResult } from "../lib/quizSessionStore"
-import { useRequireAuth } from "../hooks/useRequireAuth"
+import { useEffect, useState } from "react";
+import { Link, useLocation, useParams } from "react-router";
+import { Button } from "@components/button";
+import { useRequireAuth } from "../hooks/useRequireAuth";
+import axios from "axios";
+import { getUserId } from "@/lib/authStore";
 
-const DEFAULT_QUIZ_ID = "neon-club"
-
-type AnswerItem = {
-  music_title: string
-  anwser_correct: string
-  anwser_wrong: string
-  url: string
+interface QuestionSummaryDTO {
+  question: string;
+  title: string;
+  answer: string;
+  correctAnswer: string;
+  points: number;
 }
 
-type QuizResultData = {
-  total_anwsers: number
-  correct_anwsers: number
-  anwsers: AnswerItem[]
+interface ApiResponse {
+  summary: QuestionSummaryDTO[];
 }
 
-type LocationState = {
-  result?: QuizResultData
-}
-
-// Placeholder / mock result data for demo/preview purposes
-const PLACEHOLDER_RESULT: QuizResultData = {
-  total_anwsers: 5,
-  correct_anwsers: 3,
-  anwsers: [
-    {
-      music_title: "Midnight Dreams",
-      anwser_correct: "The Weeknd",
-      anwser_wrong: "Drake",
-      url: "https://example.com/track1"
-    },
-    {
-      music_title: "Electric Feel",
-      anwser_correct: "MGMT",
-      anwser_wrong: "MGMT",
-      url: "https://example.com/track2"
-    },
-    {
-      music_title: "Neon Lights",
-      anwser_correct: "Lana Del Rey",
-      anwser_wrong: "Lorde",
-      url: "https://example.com/track3"
-    },
-    {
-      music_title: "Digital Love",
-      anwser_correct: "Daft Punk",
-      anwser_wrong: "Daft Punk",
-      url: "https://example.com/track4"
-    },
-    {
-      music_title: "Running Up That Hill",
-      anwser_correct: "Kate Bush",
-      anwser_wrong: "Placebo",
-      url: "https://example.com/track5"
-    }
-  ]
-}
+const DEFAULT_QUIZ_ID = "1";
 
 export default function ResultRoute() {
-  const { isAuthenticated } = useRequireAuth()
-  const location = useLocation()
-  const locationState = location.state as LocationState | null
-  const realResult = locationState?.result ?? getLatestResult() as QuizResultData | null
+  const { isAuthenticated } = useRequireAuth();
+  const location = useLocation();
+  const data = location.state;
+  const effectiveQuizId = data?.quizId || DEFAULT_QUIZ_ID;
+  const userId = getUserId()
 
-  if (!isAuthenticated) {
-    return null
+  const [quizResults, setQuizResults] = useState<QuestionSummaryDTO[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const fetchResults = async () => {
+      console.log("ids")
+      console.log(effectiveQuizId);
+      console.log(userId);
+      setLoading(true);
+      setError(null);
+      try {
+        const url = `http://localhost:8081/api/quizes/${effectiveQuizId}/results/${userId}`;
+        const response = await axios.get<ApiResponse>(url);
+        
+        // ✅ Extract the summary array
+        const summaryData = response.data.summary;
+        console.log("Fetched summary:", summaryData);
+        
+        setQuizResults(summaryData);
+      } catch (err) {
+        console.error("Fetch error:", err);
+        setError("Failed to load quiz results.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchResults();
+  }, [effectiveQuizId, isAuthenticated]);
+
+  // Authentication guard
+  if (!isAuthenticated) return null;
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl items-center justify-center">
+        <div className="text-center text-white/70">Loading your results...</div>
+      </div>
+    );
   }
-  
-  // Use placeholder if no real result exists
-  const result = realResult ?? PLACEHOLDER_RESULT
-  const isPlaceholder = !realResult
 
-  const { total_anwsers, correct_anwsers, anwsers } = result
-  const percent = total_anwsers > 0 ? Math.round((correct_anwsers / total_anwsers) * 100) : 0
+  // Error or no data state
+  if (error) {
+    return (
+      <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col items-center justify-center gap-4">
+        <div className="text-center text-red-400">{error}</div>
+        <Button asChild variant="outline" size="lg">
+          <Link to={`/quiz/${DEFAULT_QUIZ_ID}`}>Try again</Link>
+        </Button>
+      </div>
+    );
+  }
+
+  // No results (empty array or null)
+  if (!quizResults || quizResults.length === 0) {
+    return (
+      <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col items-center justify-center gap-4">
+        <div className="text-center text-white/70">No results found for this quiz.</div>
+        <Button asChild variant="outline" size="lg">
+          <Link to={`/quiz/${DEFAULT_QUIZ_ID}`}>Take a quiz</Link>
+        </Button>
+      </div>
+    );
+  }
+
+  // Calculate totals
+  const totalPossiblePoints = quizResults.reduce((sum, q) => sum + q.points, 0);
+  const earnedPoints = quizResults.reduce(
+    (sum, q) => sum + (q.answer === q.correctAnswer ? q.points : 0),
+    0
+  );
+  const percent = totalPossiblePoints > 0 ? Math.round((earnedPoints / totalPossiblePoints) * 100) : 0;
 
   return (
     <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col gap-10 pt-6">
@@ -92,18 +118,11 @@ export default function ResultRoute() {
             Final score
           </p>
           <h1 className="text-3xl font-semibold text-white md:text-5xl">
-            {correct_anwsers} / {total_anwsers} tracks locked
+            {earnedPoints} / {totalPossiblePoints} points
           </h1>
           <p className="text-base text-white/70">
-            You matched {percent}% of the set. Ready for another round?
+            You earned {percent}% of available points. Ready for another round?
           </p>
-
-          {/* Placeholder badge */}
-          {isPlaceholder && (
-            <div className="mt-2 inline-flex items-center rounded-full bg-amber-500/20 px-3 py-1 text-xs font-medium text-amber-300 backdrop-blur-sm">
-              ⚡ Demo preview – start a quiz to see your real results
-            </div>
-          )}
 
           <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
             <Button asChild size="lg" className="h-11 px-6 text-base">
@@ -118,26 +137,21 @@ export default function ResultRoute() {
 
       {/* Answers Breakdown Section */}
       <section className="rounded-2xl border border-white/10 bg-white/5 p-6">
-        <h2 className="mb-4 text-xl font-semibold text-white">
-          Track-by-track results
-          {isPlaceholder && (
-            <span className="ml-2 text-sm font-normal text-white/40">(demo data)</span>
-          )}
-        </h2>
+        <h2 className="mb-4 text-xl font-semibold text-white">Question-by-question results</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {anwsers.map((answer, index) => {
-            const isCorrect = answer.anwser_wrong === answer.anwser_correct
+          {quizResults.map((item, index) => {
+            const isCorrect = item.answer === item.correctAnswer;
             return (
               <div
                 key={index}
                 className="group relative overflow-hidden rounded-xl border border-white/10 bg-black/40 p-4 transition-all hover:border-white/20"
               >
                 {isCorrect && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-cyan-500/5 opacity-0 transition-opacity group-hover:opacity-100" />
                 )}
-                
+
                 <div className="relative z-10 flex items-start gap-3">
-                  <div className="flex-shrink-0 mt-0.5">
+                  <div className="mt-0.5 flex-shrink-0">
                     {isCorrect ? (
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -153,38 +167,35 @@ export default function ResultRoute() {
                     )}
                   </div>
 
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-white truncate" title={answer.music_title}>
-                      {answer.music_title}
+                  <div className="min-w-0 flex-1">
+                    <h3 className="truncate font-semibold text-white" title={item.question}>
+                      {item.question}
                     </h3>
+                    {item.title && (
+                      <p className="mt-0.5 text-xs text-white/50">{item.title}</p>
+                    )}
                     <div className="mt-2 space-y-1 text-sm">
                       <p className="text-white/60">
-                        <span className="text-white/40">Correct:</span> {answer.anwser_correct}
+                        <span className="text-white/40">Correct answer:</span> {item.correctAnswer}
                       </p>
                       <p className="text-white/60">
-                        <span className="text-white/40">Your answer:</span>{' '}
-                        <span className={isCorrect ? 'text-emerald-400' : 'text-red-400'}>
-                          {answer.anwser_wrong || '(no answer)'}
+                        <span className="text-white/40">Your answer:</span>{" "}
+                        <span className={isCorrect ? "text-emerald-400" : "text-red-400"}>
+                          {item.answer || "(no answer)"}
                         </span>
                       </p>
+                      <p className="text-white/60">
+                        <span className="text-white/40">Points:</span> {item.points}
+                        {!isCorrect && <span className="ml-1 text-white/40">(not earned)</span>}
+                      </p>
                     </div>
-                    {answer.url && (
-                      <a
-                        href={answer.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-2 inline-block text-xs text-white/40 hover:text-cyan-400 transition-colors"
-                      >
-                        ℹ️ Track info
-                      </a>
-                    )}
                   </div>
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </section>
     </div>
-  )
+  );
 }

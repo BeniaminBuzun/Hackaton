@@ -6,15 +6,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.agh.hackathon.QuestionType.QuestionType;
+import pl.agh.hackathon.User.User;
+import pl.agh.hackathon.User.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserStatsService {
 
+    private final UserRepository userRepository;
     private final UserStatsRepository userStatsRepository;
 
     // answers = { GENRE -> true, ARTISTS -> false, ... }
@@ -105,8 +109,15 @@ public class UserStatsService {
                 case TIME_PERIOD -> calcAccuracy(s.getTotalTimePeriodAnswers(), s.getCorrectTimePeriodAnswers());
             };
 
+            Optional<User> user = userRepository.getById(s.getUserId());
+
+            String username = user.isPresent()
+                    ? user.get().getName()
+                    : "";
+
             entries.add(new LeaderboardEntryDto(
                     offset + i + 1,
+                    username,
                     s.getUserId(),
                     s.getTotalAnswers(),
                     s.getCorrectAnswers(),

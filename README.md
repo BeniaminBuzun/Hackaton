@@ -20,6 +20,57 @@ Pomoże to chętnym użytkownikom zorientować się w świecie muzycznym lub zap
 
 ## Endpoints
 
+### Endpointy do obsługi klienta:
+
+1. Metoda POST do rejestracji nowego użytkownika
+
+```bash
+POST /user/registration
+```
+
+Format zapytania:
+
+{
+    "nick" : "username",
+    "password" : "password
+}
+
+Format odpowiedzi:
+{
+    "id" : 2137
+}
+
+2. Metoda POST do logowania użytkownika
+
+```bash
+POST /user/login
+```
+
+Format zapytania:
+
+{
+    "nick" : "username",
+    "password" : "password
+}
+
+Format odpowiedzi:
+{
+    "id" : 67
+}
+
+3. Metoda GET do odczytania nazwy danego użytkownika
+
+```bash
+GET /user/{userId}
+```
+
+Format zapytania: puste
+
+Format odpowiedzi:
+"username"
+
+
+
 ### Endpointy do tworzenia rozgrywki:
 
 1. Metoda POST do tworzenia quizu 
