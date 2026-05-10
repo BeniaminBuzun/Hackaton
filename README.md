@@ -106,13 +106,14 @@ POST /api/quizes/answers
 ```
 
 Bierzemy do Body:
-- answer id
+- quiz id
 - user id
+- question id
 - treść odpowiedzi udzielonej przez użytkownika
 
 Zwracamy w Response:
 - informacje czy udzielona odpowiedź jest poprawna (boolean)
-
+- poprawną odpowiedź
 ---
 
 3. Metoda GET z wynikami
