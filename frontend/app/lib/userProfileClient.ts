@@ -29,7 +29,7 @@ const API_BASE_URL =
 const getStatsUrl = (userId: string) =>
   new URL(`/api/stats/${userId}`, API_BASE_URL).toString()
 const getUsernameUrl = (userId: string) =>
-  new URL(`/user/${userId}`, API_BASE_URL).toString()
+  new URL(`/api/user/${userId}`, API_BASE_URL).toString()
 
 export type UserProfile = {
   userId: string

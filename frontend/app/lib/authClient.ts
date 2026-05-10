@@ -12,8 +12,8 @@ const DEFAULT_API_BASE_URL = "http://localhost:8081"
 const API_BASE_URL =
   (import.meta as ImportMeta).env?.VITE_API_BASE_URL ?? DEFAULT_API_BASE_URL
 
-const LOGIN_ENDPOINT = new URL("/user/login", API_BASE_URL).toString()
-const REGISTER_ENDPOINT = new URL("/user/registration", API_BASE_URL).toString()
+const LOGIN_ENDPOINT = new URL("/api/user/login", API_BASE_URL).toString()
+const REGISTER_ENDPOINT = new URL("/api/user/registration", API_BASE_URL).toString()
 
 const readErrorMessage = async (response: Response) => {
   const contentType = response.headers.get("Content-Type") ?? ""

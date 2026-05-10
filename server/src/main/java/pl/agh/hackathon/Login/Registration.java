@@ -16,7 +16,7 @@ public class Registration {
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @PostMapping("/user/registration")
+    @PostMapping("/api/user/registration")
     public ResponseDTO registration(@RequestBody RegistrationDTO request) {
 
         if(userRepository.findByName(request.nick).isPresent()) {

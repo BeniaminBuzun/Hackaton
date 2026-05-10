@@ -19,7 +19,7 @@ public class Login {
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @PostMapping("/user/login")
+    @PostMapping("/api/user/login")
     public ResponseDTO login(@RequestBody RegistrationDTO request) {
 
 
