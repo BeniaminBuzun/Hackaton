@@ -1,3 +1,5 @@
+import { postJson } from "./apiClient"
+
 export type ChoiceId = "a" | "b" | "c" | "d"
 
 export type QuizChoice = {
@@ -212,9 +214,7 @@ const mockClient: QuizClient = {
 
 const apiClient: QuizClient = {
   startQuiz: async (quizId) => {
-    const response = await fetch(`/api/quizzes/${quizId}/start`, {
-      method: "POST",
-    })
+    const response = await postJson(`/api/quizzes/${quizId}/start`)
 
     if (!response.ok) {
       throw new Error("Unable to start quiz")
@@ -223,10 +223,8 @@ const apiClient: QuizClient = {
     return (await response.json()) as QuizStartPayload
   },
   submitAnswer: async ({ quizId, questionId, choiceId }) => {
-    const response = await fetch(`/api/quizzes/${quizId}/answer`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ questionId, choiceId }),
+    const response = await postJson(`/api/quizzes/${quizId}/answer`, {
+      body: { questionId, choiceId },
     })
 
     if (!response.ok) {
@@ -236,9 +234,7 @@ const apiClient: QuizClient = {
     return (await response.json()) as QuizAnswerResult
   },
   finalizeQuiz: async (quizId) => {
-    const response = await fetch(`/api/quizzes/${quizId}/finish`, {
-      method: "POST",
-    })
+    const response = await postJson(`/api/quizzes/${quizId}/finish`)
 
     if (!response.ok) {
       throw new Error("Unable to finalize quiz")

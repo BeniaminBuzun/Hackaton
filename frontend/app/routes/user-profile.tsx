@@ -2,11 +2,21 @@ import { Link, useParams } from "react-router"
 
 import { Button } from "@components/button"
 
+import { useRequireAuth } from "../hooks/useRequireAuth"
 import { useUserProfile } from "../hooks/useUserProfile"
 
 const formatPercent = (value: number) => `${Math.max(0, Math.min(value, 100))}%`
 
 export default function UserProfileRoute() {
+  const { isAuthenticated } = useRequireAuth()
+  if (!isAuthenticated) {
+    return null
+  }
+
+  return <UserProfileContent />
+}
+
+function UserProfileContent() {
   const { userId } = useParams()
   const { status, data, error, refresh } = useUserProfile(userId)
 

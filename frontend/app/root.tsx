@@ -9,9 +9,13 @@ import {
 } from "react-router"
 
 import type { Route } from "./+types/root"
+import { Button } from "@components/button"
 import "@styles/globals.css"
+import { useAuth } from "./hooks/useAuth"
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const { isAuthenticated, logout } = useAuth()
+
   return (
     <html lang="en" className="dark">
       <head>
@@ -43,11 +47,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <p className="text-lg font-semibold">Music Quizzer</p>
               </div>
             </div>
-            <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
-              <Link to="/">Home</Link>
-              <Link to="/settings">Quiz</Link>    
-              <Link to="/settings">Settings</Link>
-            </nav>
+            <div className="flex items-center gap-4">
+              <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
+                <Link to="/">Home</Link>
+                <Link to="/quiz">Quiz</Link>
+                <Link to="/settings">Settings</Link>
+              </nav>
+              <div className="flex items-center gap-2">
+                {isAuthenticated ? (
+                  <Button size="sm" variant="outline" onClick={logout}>
+                    Log out
+                  </Button>
+                ) : (
+                  <>
+                    <Button asChild size="sm" variant="ghost">
+                      <Link to="/login">Log in</Link>
+                    </Button>
+                    <Button asChild size="sm">
+                      <Link to="/register">Register</Link>
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
           </header>
 
           <main className="relative mx-auto w-full max-w-6xl px-6 pb-16">

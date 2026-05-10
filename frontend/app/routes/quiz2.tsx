@@ -3,14 +3,21 @@ import MusicPlayer from "@components/musicPlayer";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
+import { useRequireAuth } from "../hooks/useRequireAuth";
+
 export default function QuizRoute2() {
+  const { isAuthenticated } = useRequireAuth();
   const location = useLocation();
   const data = location.state;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
-  console.log(data.questionsForMusic.length);
-  if (!data || !data.questionsForMusic || data.questionsForMusic.length === 0) {
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  if (!data || !data.questions || data.questions.length === 0) {
     return (
       <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col items-center justify-center gap-10 pt-6">
         <section className="rounded-[2.5rem] border border-white/10 bg-white/5 px-8 py-12 text-center shadow-[0_0_60px_rgba(34,211,238,0.15)]">
@@ -25,30 +32,16 @@ export default function QuizRoute2() {
     );
   }
 
-  const currentItem = data.questionsForMusic[currentIndex];
-  const isLastItem = currentIndex >= data.questionsForMusic.length - 1;
+  const currentItem = data.questions[currentIndex];
+  const isLastItem = currentIndex >= data.questions.length - 1;
 
   const answerQuestion = (response: string) => {
     console.log("sending POST to server");
     console.log(response);
     if (!isLastItem) {
-      if (response === "qqq") {
-        console.log("correct answer");
-      }
-      else {
-        console.log("wrong answer");
-      }
-      setTimeout(() => {
-        setCurrentIndex((prev) => prev + 1);
-
-      }, 3000);
-
+      setCurrentIndex((prev) => prev + 1);
     } else {
-      setTimeout(() => {
-        navigate("/result");
-
-      }, 3000);
-
+      navigate("/result");
     }
   };
 
@@ -68,14 +61,14 @@ export default function QuizRoute2() {
               Music Quiz
             </h1>
             <p className="mt-3 text-sm font-semibold uppercase tracking-[0.3em] text-white/50">
-              {/* Track {currentIndex + 1} of {data.questionsForMusic.length} */}
+              Track {currentIndex + 1} of {data.questions.length}
             </p>
           </div>
         </div>
 
         {/* Player Card */}
         <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 p-6 shadow-[0_0_60px_rgba(34,211,238,0.15)] backdrop-blur-sm">
-          <AudioVisualizer audioUrl={"http://"+currentItem.songUrl} />
+          <AudioVisualizer audioUrl={currentItem.music_url} />
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-black/40 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
