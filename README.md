@@ -42,7 +42,7 @@ Bierzemy do Body:
 - dict with answers ( genre->answer, author->answer etc.)
 
 Zwracamy w Response:
-- dict z informacja czy dobrze odpowiedzielismy
+- informacje czy dobrze odpowiedzielismy oraz string z tą odpowiedzią
 
 ---
 
