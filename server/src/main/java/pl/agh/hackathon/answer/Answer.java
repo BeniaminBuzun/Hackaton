@@ -1,7 +1,10 @@
 package pl.agh.hackathon.answer;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.agh.hackathon.Quiz.Quiz;
 import pl.agh.hackathon.User.User;
 import pl.agh.hackathon.question.Question;
