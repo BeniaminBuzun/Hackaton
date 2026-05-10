@@ -8,10 +8,12 @@
 
 Celem zespołu jest wykonanie aplikacji, która ułatwi użytkownikom zapoznawanie się z różnymi gatunkami muzycznymi, zespołami, czy pojedycznymi utworami.
 
-Na rynku brakuje aplikacji lub serwisów przez które pasjonaci muzyki mogliby porównywać swoją znajomość świata muzyki, a samo poznawanie różnorodnej muzyki jest długotrwałym procesem.
+Na rynku brakuje aplikacji lub serwisów przez które pasjonaci muzyki mogliby porównywać swoją znajomość świata muzyki, a samo poznawanie różnorodnych gatunków i artystów jest długotrwałym procesem.
 Ta aplikacja ma za zadanie jednocześnie umożliwić użytkownikom na rywalizację w tej dziedzinie, oraz zapoznać się z dobrej jakości reprezentantami gatunków, czy okresów czasowych.
 
 Użytkownik może utworzyć quiz według swoich preferencji, a następnie, słuchając utworów, odgadywać gatunek, autora (zespół muzyczny), a nawet przedział czasowy w którym dany utwór powstał.
+
+##Scenariusz użycia
 
 Po wejściu na ekran główny użytkownik może się zarejestrować lub zalogować podając nazwę użytkownika oraz hasło.
 Po udanym logowaniu, użytkownik może zobaczyć swój profil, statystyki oraz rankingi lub rozpocząć quiz.
